@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
 import { IoClose } from "react-icons/io5";
 import { Link, useLocation } from 'react-router-dom';
+import "../../index.css"
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,6 +39,12 @@ export default function Header() {
               to="/about"
               className={`hover:text-sky-700 font-semibold text-lg ${isActive('/about') ? 'text-blue-600' : ''}`}
             >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/about') ? 'text-blue-600' : ''}`}
+            >
               About Us
             </Link>
             <Link
@@ -47,19 +54,19 @@ export default function Header() {
               Contact Us
             </Link>
             <Link
-              to="/blog"
-              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/blog') ? 'text-blue-600' : ''}`}
+              to="/exploreAll"
+              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/exploreAll') ? 'text-blue-600' : ''}`}
             >
-              Blog
+              Explore All
             </Link>
           </div>
         </div>
 
         <div className="">
           <Link
-            to="/login" // Adjust this to the actual login path
-            className="text-sm font-semibold text-gray-90 border-gray-700-600 hover:bg-sky-300 cursor-pointer border-2 rounded-sm p-2"
-          >
+            to="/login"
+            className="text-sm font-semibold text-gray-900 border-gray-700 hover:bg-sky-300 cursor-pointer border-2 rounded-sm p-2"
+            >
             Log in <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>

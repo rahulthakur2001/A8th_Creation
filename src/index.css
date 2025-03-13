@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+:root {
+    --global-color: #38454c;
+}
+
+.global-color {
+    color: var(--global-color);
+  }
