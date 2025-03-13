@@ -1,15 +1,26 @@
-import './App.css'
+import React, { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MainLayout } from "./components/Layouts/MainLayout";
+import { Loder } from "./components/Loader/Loder";
+
+const Dashboard = React.lazy(() => import("./components/Dashboard/Dashboard"));
+const ContactUs = React.lazy(() => import("./components/ContactUs/ContactUs"));
+const AboutUs = React.lazy(() => import("./components/AboutUs/AboutUs"));
 
 function App() {
-
   return (
-    <>
-      <h1 className="text-3xl font-bold underline bg-amber-600">
-        Hello world!
-      </h1>
-
-    </>
-  )
+    <BrowserRouter>
+      <Suspense fallback={<Loder />}>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
