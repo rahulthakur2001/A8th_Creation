@@ -36,8 +36,8 @@ export default function Header() {
 
           <div className="hidden lg:flex flex-1 gap-8">
             <Link
-              to="/about"
-              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/about') ? 'text-blue-600' : ''}`}
+              to="/"
+              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/') ? 'text-blue-600' : ''}`}
             >
               Home
             </Link>

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MainLayout } from "./components/Layouts/MainLayout";
 import { Loder } from "./components/Loader/Loder";
 import ExploreAll from "./components/ExploreAll/ExploreAll";
+import Login from "./components/Login&signup/Login";
 
 const Dashboard = React.lazy(() => import("./components/Dashboard/Dashboard"));
 const ContactUs = React.lazy(() => import("./components/ContactUs/ContactUs"));
@@ -13,6 +14,7 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<Loder />}>
         <Routes>
+          <Route path="/Login" element={<Login />} />
           <Route element={<MainLayout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
