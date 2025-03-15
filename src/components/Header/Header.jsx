@@ -16,7 +16,7 @@ export default function Header() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="bg-white w-full shadow fixed z-10">
+    <header className="bg-gradient-to-b from-gray-900 to-gray-600 w-full shadow fixed z-10">
       <nav className="mx-auto flex max-w-8xl items-center justify-between p-5 lg:px-10">
         {
           mobileMenuOpen ? (
@@ -39,25 +39,25 @@ export default function Header() {
           <div className="hidden lg:flex items-center flex-1 gap-8">
             <Link
               to="/"
-              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/') ? 'text-blue-600' : ''}`}
+              className={`hover:text-teal-700 font-bold text-lg ${isActive('/') ? 'text-teal-600' : 'text-white'}`}
             >
               Home
             </Link>
             <Link
               to="/about"
-              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/about') ? 'text-blue-600' : ''}`}
+              className={`hover:text-teal-700 font-bold text-lg ${isActive('/about') ? 'text-teal-600' : 'text-white'}`}
             >
               About Us
             </Link>
             <Link
               to="/contact"
-              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/contact') ? 'text-blue-600' : ''}`}
+              className={`hover:text-teal-700 font-bold text-lg ${isActive('/contact') ? 'text-teal-600' : 'text-white'}`}
             >
               Contact Us
             </Link>
             <Link
               to="/exploreAll"
-              className={`hover:text-sky-700 font-semibold text-lg ${isActive('/exploreAll') ? 'text-blue-600' : ''}`}
+              className={`hover:text-teal-700 font-bold text-lg ${isActive('/exploreAll') ? 'text-teal-600' : 'text-white'}`}
             >
               Explore All
             </Link>
@@ -67,7 +67,7 @@ export default function Header() {
         <div className="">
           <Link
             to="/login"
-            className="text-xm font-semibold text-gray-900 border-gray-700 hover:bg-sky-300 cursor-pointer border-2 rounded-full px-5 py-3"
+            className="text-xm font-semibold text-white  bg-teal-800 hover:bg-teal-700 cursor-pointer rounded-sm px-5 py-2"
             >
             Log in
           </Link>
@@ -83,19 +83,19 @@ export default function Header() {
           <div className="flex flex-col text-left">
             <Link
               to="/about"
-              className={`text-lg font-semibold ${isActive('/about') ? 'text-blue-600' : ''}`}
+              className={`text-lg font-semibold ${isActive('/about') ? 'text-teal-900' : ''}`}
             >
               About Us
             </Link>
             <Link
               to="/contact"
-              className={`text-lg font-semibold ${isActive('/contact') ? 'text-blue-600' : ''}`}
+              className={`text-lg font-semibold ${isActive('/contact') ? 'text-teal-900' : ''}`}
             >
               Contact Us
             </Link>
             <Link
               to="/blog"
-              className={`text-lg font-semibold ${isActive('/blog') ? 'text-blue-600' : ''}`}
+              className={`text-lg font-semibold ${isActive('/blog') ? 'text-teal-900' : ''}`}
             >
               Blog
             </Link>
