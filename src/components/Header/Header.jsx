@@ -3,6 +3,7 @@ import { IoMenu } from 'react-icons/io5';
 import { IoClose } from "react-icons/io5";
 import { Link, useLocation } from 'react-router-dom';
 import "../../index.css"
+import logo from  '../../assets/logo.png'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,13 +12,12 @@ export default function Header() {
   const openMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
-
   // Function to determine if the link is active
   const isActive = (path) => location.pathname === path;
 
   return (
     <header className="bg-white w-full shadow fixed z-10">
-      <nav className="mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-10">
+      <nav className="mx-auto flex max-w-8xl items-center justify-between p-5 lg:px-10">
         {
           mobileMenuOpen ? (
             <IoClose onClick={openMenu} className="lg:hidden text-2xl cursor-pointer" />
@@ -26,15 +26,17 @@ export default function Header() {
           )
         }
         <div className="flex flex-1 gap-20">
-          <Link to="/" className='md:ml-0 ml-10'>
+          <Link to="/" className='md:ml-0 ml-8'>
+          <div className='w-auto h-10'>
             <img
               alt=""
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-8 w-auto"
+              src={logo}
+              className="object-contain h-full w-full"
             />
+          </div>
           </Link>
 
-          <div className="hidden lg:flex flex-1 gap-8">
+          <div className="hidden lg:flex items-center flex-1 gap-8">
             <Link
               to="/"
               className={`hover:text-sky-700 font-semibold text-lg ${isActive('/') ? 'text-blue-600' : ''}`}
@@ -65,9 +67,9 @@ export default function Header() {
         <div className="">
           <Link
             to="/login"
-            className="text-sm font-semibold text-gray-900 border-gray-700 hover:bg-sky-300 cursor-pointer border-2 rounded-sm p-2"
+            className="text-xm font-semibold text-gray-900 border-gray-700 hover:bg-sky-300 cursor-pointer border-2 rounded-full px-5 py-3"
             >
-            Log in <span aria-hidden="true">&rarr;</span>
+            Log in
           </Link>
         </div>
       </nav>
