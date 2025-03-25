@@ -124,18 +124,21 @@ const AboutUs = () => {
       },
       {
         question: "What is a hiring strategy?",
-        answer: "A hiring strategy is a comprehensive plan of action used to find, attract, and hire the best talent for an organization. It includes steps such as defining roles, creating job descriptions, specifying qualifications and skills needed for each role, designing interviewing protocols, engagement activities, managing candidate databases, tracking metrics on completed hires, and measuring results. A well-thought-out hiring strategy can also save time and money while contributing to higher levels of employee satisfaction.",
+        answer:
+          "A hiring strategy is a comprehensive plan of action used to find, attract, and hire the best talent for an organization. It includes steps such as defining roles, creating job descriptions, specifying qualifications and skills needed for each role, designing interviewing protocols, engagement activities, managing candidate databases, tracking metrics on completed hires, and measuring results. A well-thought-out hiring strategy can also save time and money while contributing to higher levels of employee satisfaction.",
       },
       {
         question: "What are the different recruitment methods?",
-        answer: "Recruitment methods include job postings, employee referrals, recruitment agencies, campus hiring, and social media hiring.",
+        answer:
+          "Recruitment methods include job postings, employee referrals, recruitment agencies, campus hiring, and social media hiring.",
       },
       {
         question: "How can I recruit candidates fast?",
-        answer: "To recruit candidates fast, utilize job boards, social media, employee referrals, and streamline your interview process.",
+        answer:
+          "To recruit candidates fast, utilize job boards, social media, employee referrals, and streamline your interview process.",
       },
     ],
-  }
+  };
   return (
     <div>
       <div
@@ -192,6 +195,52 @@ const AboutUs = () => {
             your ideas. Founded in 2010, we’re the one-stop platform for all the
             cool solutions, content, and inspiration you need to express the
             power of your ideas.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div class="p-20 bg-sky-200">
+          <h3 class="text-xl font-light">
+            Scroll Up and Down to see the parallax effect
+          </h3>
+        </div>
+
+        <div
+          class="w-full h-96 bg-fixed bg-cover bg-center flex justify-center items-center"
+          style={{backgroundImage:"url(https://static.vecteezy.com/system/resources/previews/001/339/185/non_2x/abstract-banner-with-modern-wireframe-landscape-design-free-vector.jpg)"}}
+        >
+          <h1 class="text-white opacity-80 drop-shadow-md text-4xl italic font-bold">
+            Welcome to KindaCode.com
+          </h1>
+        </div>
+
+        <div class="p-20 space-y-8">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+            imperdiet viverra ante et tincidunt. Nullam mollis, elit consectetur
+            iaculis tempor, ante augue accumsan odio, ut feugiat eros velit sed
+            nibh. Nam eu eros fermentum, aliquam sem at, accumsan augue. Aenean
+            lacus lorem, interdum vel fermentum sed, sodales id libero. Nullam
+            vulputate commodo urna id mattis. Fusce iaculis maximus felis.
+            Nullam et orci at mi ultricies laoreet et eget ipsum. Aliquam luctus
+            posuere efficitur. Mauris scelerisque leo malesuada tellus malesuada
+            accumsan. Ut non metus velit. Vestibulum lectus nulla, ornare a nisl
+            nec, pretium viverra tellus. Phasellus sit amet magna augue. Sed a
+            diam pulvinar metus auctor tincidunt sed quis purus. Donec id lorem
+            diam.
+          </p>
+
+          <p>
+            {" "}
+            Donec eros risus, porttitor eget risus vel, pulvinar hendrerit ante.
+            Maecenas quis pretium metus. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Nulla
+            facilisi. Nam rutrum, augue et sagittis aliquam, mi nisi lobortis
+            enim, eget egestas sapien urna in turpis. Quisque scelerisque dolor
+            sagittis lorem accumsan, at tempus odio convallis. Nulla venenatis
+            pulvinar ipsum vel auctor. Praesent a enim at erat fringilla
+            lacinia. Aenean eu ultrices ante.
           </p>
         </div>
       </div>
@@ -291,8 +340,8 @@ const AboutUs = () => {
                         className="w-20 h-20 rounded-full"
                       />
                       <p className="px-1 overflow-hidden text-ellipsis max-w-[calc(100%-5rem)]">
-                        A8th Creation is the ultimate solution for the best tools for
-                        any creative work. I LOVE IT!!!
+                        A8th Creation is the ultimate solution for the best
+                        tools for any creative work. I LOVE IT!!!
                       </p>
                     </div>
                   </div>
@@ -320,13 +369,19 @@ const AboutUs = () => {
               >
                 {faq.question}
                 <span
-                  className={`text-gray-500 cursor-pointer transition-transform duration-300 hover:rotate-180 ${openIndex === index ? "rotate-270" : "rotate-90"}`}
+                  className={`text-gray-500 cursor-pointer transition-transform duration-300 hover:rotate-180 ${
+                    openIndex === index ? "rotate-270" : "rotate-90"
+                  }`}
                 >
                   <BiChevronRight />
                 </span>
               </button>
               <div
-                className={`overflow-hidden transition-all cursor-pointer duration-300 ${openIndex === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}
+                className={`overflow-hidden transition-all cursor-pointer duration-300 ${
+                  openIndex === index
+                    ? "max-h-40 opacity-100"
+                    : "max-h-0 opacity-0"
+                }`}
               >
                 <p className="text-gray-700 pb-4">{faq.answer}</p>
               </div>
