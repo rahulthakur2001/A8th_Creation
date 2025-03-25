@@ -8,15 +8,15 @@ const Login = () => {
   const [isOtpActive, setIsOtpActive] = useState(false);
   const [form , setForm] = useState();
 
-  const signup = async(data) =>{
+  const signup = async (data) => {
     try {
-      const response = await Postapi("/auth/register",data)
+      const response = await Postapi("auth/register", data);
       console.log(response);
-      
     } catch (e) {
       console.log(e);
     }
-  }
+  };
+  
   
   const handleform = (e) => {
     const { name, value } = e.target;

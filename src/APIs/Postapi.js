@@ -1,15 +1,20 @@
 import axios from "axios";
 
-const Postapi = async (Url, data) => {
+export async function postApi(url, data) {
   try {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
-    console.log(`API URL: ${baseUrl}${Url}`);
-    const response = await axios.post(`${baseUrl}${Url}`, data);
+    const baseURL = import.meta.env.VITE_API_URL;
+
+    console.log("Base URL:", baseURL);
+
+    if (!baseURL) {
+      throw new Error("VITE_API_URL is not set correctly in your environment variables.");
+    }
+    const response = await axios.post(`${baseURL}${url}`, data);
     return response.data;
   } catch (error) {
-    console.error("API Error:", error);
+    console.error("Error during API call:", error);
     throw error;
   }
-};
+}
 
-export default Postapi;
+export default postApi;
