@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { MainLayout } from "./components/Layouts/MainLayout";
 import  Loder  from "./components/Loader/Loder";
 import Login from "./components/Login&signup/Login";
+import {Admin_Panel} from "./Admin_panel/Admin_Panel";
 
 const Dashboard = React.lazy(() => import("./components/Dashboard/Dashboard"));
 const ContactUs = React.lazy(() => import("./components/ContactUs/ContactUs"));
@@ -39,6 +40,7 @@ function App() {
   return (
     <Suspense fallback={<Loder />}>
       <Routes>
+        <Route path="/admin" element={<Admin_Panel />} />
         <Route path="/login" element={<Login />} />
         <Route element={<MainLayout />}>
           <Route path="/" element={<Dashboard />} />

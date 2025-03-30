@@ -1,37 +1,54 @@
 import { useState } from "react";
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import Postapi from "../../APIs/Postapi";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
   const [isForgotPasswordActive, setIsForgotPasswordActive] = useState(false);
   const [isOtpActive, setIsOtpActive] = useState(false);
   const [form , setForm] = useState();
-
+  
+  
   const signup = async (data) => {
     try {
-      const response = await Postapi("auth/register", data);
-      console.log(response);
+      const response = await Postapi("auth/register", data)
+      .then ((response) => {
+        toast.success(response.message);
+        setIsOtpActive(true);
+      })
     } catch (e) {
       console.log(e);
     }
   };
-  
+
+  const Otp = async (data) => {
+    try {
+      const response = await Postapi("auth/verify-otp", data)
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const [otp ,setOtp] =  useState();
+  const handleOtpSubmit = (e) => {
+    Otp({email,otp})
+  }
   
   const handleform = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   }
-
+  
   const handlesignin = (e) => {
     e.preventDefault();
-    signup(form);
-    setIsOtpActive(true); 
+    signup(form); 
   }
 
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <ToastContainer/>
       <div className="relative w-[768px] max-w-full min-h-[480px] bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-700">
         {/* Forms Container */}
         <div
@@ -47,17 +64,7 @@ const Login = () => {
             {/* Sign In Form */}
             <div className="w-1/2 h-full flex flex-col items-center justify-center p-10">
               <h1 className="text-2xl font-bold">Sign In</h1>
-              <div className="flex gap-3 my-4">
-                <a href="#" className="p-2 border rounded-full">
-                  <FaFacebookF />
-                </a>
-                <a href="#" className="p-2 border rounded-full">
-                  <FaGooglePlusG />
-                </a>
-                <a href="#" className="p-2 border rounded-full">
-                  <FaLinkedinIn />
-                </a>
-              </div>
+              
               <span className="text-sm">or use your account</span>
               <input
                 type="email"
@@ -84,24 +91,14 @@ const Login = () => {
             {/* Sign Up Form */}
             <div className="w-1/2 h-full flex flex-col items-center justify-center p-10">
               <h1 className="text-2xl font-bold">Sign Up</h1>
-              <div className="flex gap-3 my-4">
-                <a href="#" className="p-2 border rounded-full">
-                  <FaFacebookF />
-                </a>
-                <a href="#" className="p-2 border rounded-full">
-                  <FaGooglePlusG />
-                </a>
-                <a href="#" className="p-2 border rounded-full">
-                  <FaLinkedinIn />
-                </a>
-              </div>
               <span className="text-sm">or use your email for registration</span>
               <input
-                name="username"
+                name="name"
                 type="text"
                 placeholder="Username"
                 className="w-full p-3 my-2 bg-gray-200 rounded"
                 onChange={handleform}
+                required
               />
               <input
                 name="email"
@@ -109,6 +106,7 @@ const Login = () => {
                 placeholder="Email"
                 className="w-full p-3 my-2 bg-gray-200 rounded"
                 onChange={handleform}
+                required
               />
               <input
                 name="password"
@@ -116,6 +114,7 @@ const Login = () => {
                 placeholder="Password"
                 className="w-full p-3 my-2 bg-gray-200 rounded"
                 onChange={handleform}
+                required
               />
               <button
                 className="bg-red-500 text-white px-8 py-3 mt-4 cursor-pointer rounded-full transform: active:scale-[0.95]"
@@ -161,11 +160,14 @@ const Login = () => {
           <h1 className="text-2xl font-bold">Otp</h1>
           <span className="text-sm">Enter Your Otp</span>
           <input
+            onChange={ () => setOtp(e.target.value)}
             type="text"
             placeholder="Enter Otp"
             className="w-[80%] p-3 my-2 bg-gray-200 rounded"
           />
-          <button className="bg-red-500 text-white px-8 py-3 mt-4 rounded-full">
+          <button className="bg-red-500 text-white px-8 py-3 mt-4 rounded-full"
+            onClick={handleOtpSubmit}
+          >
             Submit
           </button>
           <a
