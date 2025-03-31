@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import Postapi from "../../APIs/Postapi";
 import { toast, ToastContainer } from "react-toastify";
 

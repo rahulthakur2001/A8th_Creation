@@ -1,65 +1,166 @@
 import React, { useState } from "react";
-import { FaCog, FaFolderOpen, FaFont, FaHome, FaInfo, FaLaptop, FaList, FaMap, FaMapMarker, FaPowerOff, FaTable, FaUser } from "react-icons/fa";
+import {
+  FaCog,
+  FaFolderOpen,
+  FaFont,
+  FaHome,
+  FaInfo,
+  FaLaptop,
+  FaList,
+  FaMap,
+  FaMapMarker,
+  FaPowerOff,
+  FaTable,
+  FaUser,
+} from "react-icons/fa";
+import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 export const Admin_Panel = () => {
-    const [show, setShow] = useState(false);
+  const [activeForm, setActiveForm] = useState("Dashboard");
+
+  const handleContentChange = (label) => {
+    setActiveForm(label);
+  };
+
+  const navItems = [
+    { icon: <FaHome size={19} />, label: "Dashboard" },
+    { icon: <FaLaptop size={19} />, label: "Components" },
+    { icon: <FaList size={19} />, label: "Forms" },
+    { icon: <FaFolderOpen size={19} />, label: "Files" },
+    { icon: <FaFont size={19} />, label: "Quotes" },
+    { icon: <FaTable size={19} />, label: "Tables" },
+    { icon: <FaMap size={19} />, label: "Maps" },
+  ];
 
   return (
     <div className="flex h-screen relative">
-      <nav
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
-        className="flex flex-col h-full justify-between space-y-4 px-3 py-6 bg-gray-800 text-gray-100 lg:absolute text-sm"
-      >
-        <div className={`flex justify-center items-center font-bold space-x-2 ${show ? 'bg-blue-100 text-blue-500 px-1 py-0.5 rounded' : ''}`}>
-          <i className="fa fa-bullseye text-blue-500"></i>
-          {show && <span>BRAND</span>}
-        </div>
+      <nav className="flex flex-col h-full justify-between space-y-4 px-4 py-6 bg-gray-800 text-gray-100 lg:absolute text-sm">
+        <Link to="/admin">
+          <div className="flex justify-center items-center font-bold space-x-2">
+            <i className="w-20">
+              <img src={logo} alt="" className="object-cover w-full h-10" />
+            </i>
+          </div>
+        </Link>
 
-        <div className={`flex flex-1 flex-col space-y-2 ${!show ? 'items-center' : ''}`}>
-          {[
-            { icon: <FaHome size={18}/>, label: 'Dashboard' },
-            { icon: <FaLaptop size={18}/>, label: 'Components' },
-            { icon: <FaList size={18}/>, label: 'Forms' },
-            { icon: <FaFolderOpen size={18}/>, label: 'Files' },
-            { icon: <FaFont size={18}/>, label: 'Quotes' },
-            { icon: <FaTable size={18}/>, label: 'Tables' },
-            { icon: <FaMap size={18}/>, label: 'Maps' },
-            { icon: <FaMapMarker size={18}/>, label: 'Locations' },
-            { icon: <FaInfo size={18}/>, label: 'Documentations' },
-          ].map((item, index) => (
+        <div className="flex flex-1 flex-col space-y-1">
+          {navItems.map((item, index) => (
             <span
               key={index}
-              className="space-x-2 flex items-center px-2 py-1 rounded hover:bg-blue-500 hover:text-blue-100 cursor-pointer"
+              onClick={() => handleContentChange(item.label)}
+              className={`space-x-3 flex items-center px-4 py-2 rounded cursor-pointer font-semibold
+                ${activeForm === item.label ? 'text-blue-500 bg-white' : 'hover:bg-white hover:text-blue-500'}`}
             >
               <i>{item.icon}</i>
-              {show && <span>{item.label}</span>}
+              <span className="text-[16px]">{item.label}</span>
             </span>
           ))}
         </div>
 
-        <div className={`flex flex-col space-y-2 ${!show ? 'items-center' : ''}`}>
+        <div className="flex flex-col space-y-1">
           {[
-            { icon: <FaUser size={18}/>, label: 'Profile' },
-            { icon: <FaCog size={18}/>, label: 'Settings' },
-            { icon: <FaPowerOff size={18} color="red"/>, label: 'Logout' },
+            { icon: <FaUser size={19} />, label: "Profile" },
+            { icon: <FaCog size={19} />, label: "Settings" },
+            { icon: <FaPowerOff size={19} color="red" />, label: "Logout" },
           ].map((item, index) => (
             <span
               key={index}
-              className="space-x-2 flex items-center px-2 py-1 rounded hover:bg-blue-500 hover:text-blue-100 cursor-pointer"
+              onClick={() => handleContentChange(item.label)}
+              className={`space-x-3 flex items-center px-4 py-2 rounded cursor-pointer font-semibold
+                ${activeForm === item.label ? 'text-blue-500 bg-white' : 'hover:bg-white hover:text-blue-500'}`}
             >
               <i>{item.icon}</i>
-              {show && <span>{item.label}</span>}
+              <span className="text-[16px]">{item.label}</span>
             </span>
           ))}
         </div>
       </nav>
 
-      <main className="flex flex-1 flex-shrink-0 px-2 justify-center items-center text-gray-500 bg-gray-50 space-y-2">
-        <pre className="p-4 bg-black text-gray-100 rounded">
-          &gt; Non-responsive interactive sidebar
-          &gt; Hover to toggle sidebar
-        </pre>
+      <main className="flex pl-24 py-3 space-y-2">
+        <div className="pl-26 rounded w-full max-w-md">
+          {activeForm === "Dashboard" && (
+            <form>
+              <label>
+                Dashboard Search: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Components" && (
+            <form>
+              <label>
+                Component Name: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Forms" && (
+            <form>
+              <label>
+                Form Title: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Files" && (
+            <form>
+              <label>
+                Upload File: <input type="file" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Quotes" && (
+            <form>
+              <label>
+                Quote: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Tables" && (
+            <form>
+              <label>
+                Table Name: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Maps" && (
+            <form>
+              <label>
+                Location: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Locations" && (
+            <form>
+              <label>
+                City Name: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Documentations" && (
+            <form>
+              <label>
+                Search Docs: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Profile" && (
+            <div>
+              <h1 className="text-4xl">Profile</h1>
+            <form>
+              <label>
+                Username: <input type="text" />
+              </label>
+            </form>
+            </div>
+          )}
+          {activeForm === "Settings" && (
+            <form>
+              <label>
+                Theme: <input type="text" />
+              </label>
+            </form>
+          )}
+          {activeForm === "Logout" && <div>You have been logged out.</div>}
+        </div>
       </main>
     </div>
   );
