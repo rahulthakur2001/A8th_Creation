@@ -1,14 +1,17 @@
 import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { MainLayout } from "./components/Layouts/MainLayout";
-import  Loder  from "./components/Loader/Loder";
+import Loder from "./components/Loader/Loder";
 import Login from "./components/Login&signup/Login";
-import {Admin_Panel} from "./Admin_panel/Admin_Panel";
+import { Admin_Panel } from "./Admin_panel/Admin_Panel";
+import ProtectRoute from "./actions/ProtectRoutes";
+import ViewLayout from "./components/Layouts/ViewLayout";
+import Profile from "./components/Profile/Profile";
 
 const Dashboard = React.lazy(() => import("./components/Dashboard/Dashboard"));
 const ContactUs = React.lazy(() => import("./components/ContactUs/ContactUs"));
 const AboutUs = React.lazy(() => import("./components/AboutUs/AboutUs"));
-const ExploreAll = React.lazy(()  => import("./components/ExploreAll/ExploreAll"));
+const ExploreAll = React.lazy(() => import("./components/ExploreAll/ExploreAll"));
 
 
 function App() {
@@ -43,10 +46,14 @@ function App() {
         <Route path="/admin" element={<Admin_Panel />} />
         <Route path="/login" element={<Login />} />
         <Route element={<MainLayout />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<ProtectRoute><Dashboard /></ProtectRoute>} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/exploreAll" element={<ExploreAll />} />
+        </Route>
+        <Route element={<ViewLayout />}>
+          <Route path="/profile" element={<Profile />} />
+
         </Route>
       </Routes>
     </Suspense>

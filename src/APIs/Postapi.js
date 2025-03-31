@@ -4,8 +4,6 @@ export async function postApi(url, data) {
   try {
     const baseURL = import.meta.env.VITE_API_URL;
 
-    console.log("Base URL:", baseURL);
-
     if (!baseURL) {
       throw new Error("VITE_API_URL is not set correctly in your environment variables.");
     }

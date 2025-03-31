@@ -4,15 +4,16 @@ import { IoClose } from "react-icons/io5";
 import { Link, useLocation } from 'react-router-dom';
 import "../../index.css"
 import logo from  '../../assets/logo.png'
+import { useSelector } from 'react-redux';
 
 export default function Header() {
+  const { token, user } = useSelector((state) => state.auth);  
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation(); // To track the current location
+  const location = useLocation();
 
   const openMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
-  // Function to determine if the link is active
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -63,7 +64,7 @@ export default function Header() {
             </Link>
           </div>
         </div>
-
+{/* 
         <div className="">
           <Link
             to="/login"
@@ -71,6 +72,22 @@ export default function Header() {
             >
             Log in
           </Link>
+        </div> */}
+
+        <div className="flex items-center gap-4">
+          {token ? (
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-teal-700 text-white flex items-center justify-center">
+                {user?.name?.charAt(0).toUpperCase()}
+              </div>
+              <Link to="/profile" className="text-white">Profile</Link>
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="text-xm font-semibold text-white bg-teal-800 hover:bg-teal-700 cursor-pointer rounded-sm px-5 py-2">Log in</Link>
+              <Link to="/signup" className="text-xm font-semibold text-white bg-teal-800 hover:bg-teal-700 cursor-pointer rounded-sm px-5 py-2">Sign up</Link>
+            </>
+          )}
         </div>
       </nav>
 
