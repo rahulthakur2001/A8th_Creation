@@ -2,8 +2,15 @@
 
 :root {
     --global-color: #38454c;
+    --newscroll: rgb(159, 0, 159);
 }
 
 .global-color {
     color: var(--global-color);
   }
+
+#scrollbar-width{
+    scrollbar-width: none;
+    scrollbar-color: var(--newscroll);
+    scroll-behavior: smooth;
+}

@@ -37,13 +37,12 @@ const ContactUs = () => {
           <div className="w-[60%] pt-20">
             <h1 className="text-5xl font-semibold mb-5">Contact Us</h1>
             <p className="text-gray-600 mb-4 w-100">
-              Email, call, or complete the form to learn how Snappy can solve
+              Email, call, or complete the form to learn how A8th creation can solve
               your messaging problem.
             </p>
             <p className="text-gray-600 mb-4">
-              <a href="mailto:info@snappy.io">info@snappy.io</a>
+              <a href="mailto:a8thcreation@gmail.com">a8thcreation@gmail.com</a>
             </p>
-            <p className="text-gray-600 mb-4">321-221-231</p>
             <a href="#" className="underline font-semibold text-[14px]">
               Customer Support
             </a>
@@ -73,10 +72,10 @@ const ContactUs = () => {
                 <p className="text-gray-600 text-[14px]">
                   For media-related questions or press inquiries, contact us at{" "}
                   <a
-                    href="mailto:media@snappyapp.com"
+                    href="mailto:a8thcreation@gmail.com"
                     className="text-blue-600"
                   >
-                    media@snappyapp.com
+                    a8thcreation@gmail.com
                   </a>
                   .
                 </p>
@@ -177,7 +176,7 @@ const ContactUs = () => {
                   S
                 </div>
                 <div className="ml-3">
-                  <h4 className="text-lg font-semibold">Snappy Inc.</h4>
+                  <h4 className="text-lg font-semibold">A8th creation</h4>
                   <p className="text-gray-500 text-sm">
                     Chat Beyond Limits Together
                   </p>
@@ -231,7 +230,7 @@ const ContactUs = () => {
             question.
           </span>
           <div className="flex gap-2 px-100 mt-4 relative">
-            <span className="absolute left-3 px-100 top-3">📧</span>
+            <span className="absolute left-3 pl-100 top-3">📧</span>
             <input
               type="email"
               placeholder="Your email"

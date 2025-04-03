@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { MainLayout } from "./components/Layouts/MainLayout";
 import Loder from "./components/Loader/Loder";
 import Login from "./components/Login&signup/Login";
-import { Admin_Panel } from "./Admin_panel/Admin_Panel";
+import Admin_Panel from "./Admin_panel/Admin_Panel";
 import ProtectRoute from "./actions/ProtectRoutes";
 import ViewLayout from "./components/Layouts/ViewLayout";
 import Profile from "./components/Profile/Profile";
