@@ -37,8 +37,8 @@ const ContactUs = () => {
           <div className="w-[60%] pt-20">
             <h1 className="text-5xl font-semibold mb-5">Contact Us</h1>
             <p className="text-gray-600 mb-4 w-100">
-              Email, call, or complete the form to learn how A8th creation can solve
-              your messaging problem.
+              Email, call, or complete the form to learn how A8th creation can
+              solve your messaging problem.
             </p>
             <p className="text-gray-600 mb-4">
               <a href="mailto:a8thcreation@gmail.com">a8thcreation@gmail.com</a>
@@ -164,28 +164,28 @@ const ContactUs = () => {
           <div className="relative">
             <iframe
               className="w-full h-120 border-2 border-gray-300 rounded-4xl"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086773295721!2d-122.4194156846815!3d37.77492977975948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c0c12b1ff%3A0xa8b0e528a77a923!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2sus!4v1645941226805!5m2!1sen!2sus"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.8602700909732!2d77.1459665740984!3d28.723721579936324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0176e2655757%3A0xecfb8918d8e62f21!2sA-Sign%20INSTITUTE!5e0!3m2!1sen!2sin!4v1743761286987!5m2!1sen!2sin"
               allowFullScreen=""
               loading="lazy"
             ></iframe>
 
             {/* Map Card */}
-            <div className="absolute bottom-16 left-10 bg-white shadow-lg p-4 rounded-lg w-72">
+            <div className="absolute bottom-14 left-14 bg-white shadow-lg p-4 rounded-lg w-74">
               <div className="flex items-center">
                 <div className="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center">
-                  S
+                  A
                 </div>
                 <div className="ml-3">
                   <h4 className="text-lg font-semibold">A8th creation</h4>
                   <p className="text-gray-500 text-sm">
-                    Chat Beyond Limits Together
+                    by the vision of A-sign Institute
                   </p>
                 </div>
               </div>
-              <p className="text-gray-600 mt-3">
-                <span className="font-semibold">San Francisco, USA</span>
+              <p className="text-gray-600 mt-3 text-sm">
+                <span className="font-semibold">Haiderpur Village, Delhi</span>
                 <br />
-                123 Tech Boulevard, Suite 456
+                Sunrise public School Building, Main Road
               </p>
               <a
                 href="https://www.google.com/maps"
@@ -203,17 +203,17 @@ const ContactUs = () => {
             <h3 className="text-xl font-semibold">Our Location</h3>
             <h1 className="text-4xl font-bold my-2">Connecting Near and Far</h1>
 
-            <h4 className="text-xl font-semibold mt-8">Headquarters</h4>
+            <h4 className="text-xl font-semibold mt-8">
+              Our Institute Address
+            </h4>
             <p className="text-gray-600 mt-2">
-              Snappy Inc.
+              A8th Creation
               <br />
-              San Francisco, USA
+              Sunrise public School Building, Main Rd,
               <br />
-              123 Tech Boulevard, Suite 456
+              opposite Aggrawal Sweets, Gobind Mohalla, Haiderpur,
               <br />
-              San Francisco, CA 12345
-              <br />
-              United States
+              New Delhi, 110088
             </p>
           </div>
         </div>
@@ -247,13 +247,13 @@ const ContactUs = () => {
       <div className="relative w-full h-[400px] flex items-center justify-center">
         {/* Background Image */}
         <img
-          src="https://th.bing.com/th/id/OIP.hUyuFCRYEM7fdK6QsGGOVQHaDt?w=339&h=175&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+          src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmNoeHM0OGg5NHNqOG9uN3E0dmcxbnZnM25wZXZlc3FsaWF5cGpvYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRGoqbUQvk8nwTC/giphy.gif"
           alt="Background"
           className="w-full h-full object-cover absolute opacity-80"
         />
 
         {/* Text and Buttons */}
-        <div className="relative text-center text-white z-10">
+        <div className="text-center text-white z-1">
           <h1 className="text-5xl w-200 leading-tight font-semibold mb-6">
             Ready to experience the speed and simplicity of A8th Creation?
           </h1>
@@ -267,9 +267,6 @@ const ContactUs = () => {
             </button>
           </div>
         </div>
-
-        {/* Overlay for better text visibility */}
-        <div className="absolute inset-0"></div>
       </div>
     </div>
   );

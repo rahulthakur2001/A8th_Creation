@@ -139,6 +139,34 @@ const AboutUs = () => {
       },
     ],
   };
+
+  const cards = [
+    {
+      img: "https://images.pexels.com/photos/3184435/pexels-photo-3184435.jpeg?auto=compress&cs=tinysrgb&w=600",
+      title: "We Say It Straight",
+      description:
+        "Yeah, that’s right. We talk to each other openly and honestly. Why? Because we care about working in an environment where everyone communicates directly and respectfully.",
+    },
+    {
+      img: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
+      title: "We Own Our Work",
+      description:
+        "Taking responsibility is our strength. We follow through, take pride in our efforts, and hold ourselves accountable for results.",
+    },
+    {
+      img: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=600",
+      title: "We Grow Together",
+      description:
+        "Learning never stops. We support and challenge each other to grow personally and professionally — together, as a team.",
+    },
+    {
+      img: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=600",
+      title: "We Keep It Creative",
+      description:
+        "Innovation fuels us. We experiment, explore, and push boundaries to deliver designs that are fresh, bold, and impactful.",
+    },
+  ];
+
   return (
     <div>
       <div
@@ -146,27 +174,29 @@ const AboutUs = () => {
         style={{ width: "99.9%" }}
       >
         <div className="flex-1 md:p-15 p-5">
-          <h1 className="text-4xl md:text-6xl font-semibold">
-            Express the power of your ideas with Freepik
+          <h1 className="text-4xl md:text-5xl font-semibold">
+            A8th Creation – Where Imagination Meets Design
           </h1>
-          <p className="mt-5 md:mt-10 text-xl md:text-2xl md:pr-20 pr-5">
-            Founded in 2010, we’re the one-stop platform for all the cool
-            solutions, content, and inspiration you need to express the power of
-            your ideas.
+          <p className="mt-5 md:mt-10 text-xl md:text-xl md:pr-20 pr-5">
+            Founded with a creative spark and a bold vision, A8th Creation is a
+            full-service graphic design studio dedicated to turning ideas into
+            striking visuals. Our name reflects more than just a business—it
+            represents the 8th sense: creativity. We’re not just designers;
+            we’re storytellers, brand-builders, and visual strategists.
           </p>
         </div>
 
-        <div className="flex-1 flex flex-col md:flex-row justify-between gap-0 md:p-0 p-5">
+        <div className="flex-1 flex flex-col md:flex-row justify-between gap-1 md:p-0 p-5">
           <img
             src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
-            className="w-full md:w-55 md:rounded-t-full h-50 md:h-50 mt-5 md:mt-70"
+            className="w-full md:w-55 md:rounded-t-full h-50 md:h-50 mt-5 md:mt-80"
           />
 
           <img
             src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
-            className="w-full md:w-55 rounded-t-full h-50 md:h-90 mt-5 md:mt-30"
+            className="w-full md:w-55 rounded-t-full h-50 md:h-90 mt-5 md:mt-40"
           />
 
           <img
@@ -177,7 +207,7 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className="w-full flex h-full md:flex-row flex-col md:p-10 gap-10 md:mt-0 mt-20">
+      <div className="w-full flex items-center h-full md:flex-row flex-col md:p-10 gap-10 md:mt-0 mt-20">
         <div className="flex-1 flex gap-0 md:p-0 p-5">
           <img
             src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -186,61 +216,61 @@ const AboutUs = () => {
           />
         </div>
         <div className="flex-1 text-center md:text-left">
-          <h1 className="text-2xl md:text-3xl font-semibold">
-            Express the power of your ideas with Freepik
+          <h1 className="text-2xl md:text-4xl font-semibold">
+          Your Ideas Express With Us
           </h1>
           <p className="mt-5 md:mt-10 text-lg md:pr-20">
-            Founded in 2010, we’re the one-stop platform for all the cool
-            solutions, content, and inspiration you need to express the power of
-            your ideas. Founded in 2010, we’re the one-stop platform for all the
-            cool solutions, content, and inspiration you need to express the
-            power of your ideas.
+            At A8th Creation, we believe that every idea has the potential to
+            become something extraordinary. Whether it's a rough sketch or a
+            fully-formed concept, we’re here to bring your vision to life
+            through intentional, beautiful design. Together, we’ll craft visuals
+            that not only reflect your brand but also communicate your story
+            with clarity and impact.
           </p>
         </div>
       </div>
 
       <div>
-        <div class="p-20 bg-sky-200">
-          <h3 class="text-xl font-light">
-            Scroll Up and Down to see the parallax effect
+        <div class="p-18 bg-sky-200">
+          <h3 class="text-2xl animate-bounce font-bold text-gray-800 text-center">
+            Design With Purpose.
           </h3>
         </div>
 
         <div
           class="w-full h-96 bg-fixed bg-cover bg-center flex justify-center items-center"
-          style={{backgroundImage:"url(https://static.vecteezy.com/system/resources/previews/001/339/185/non_2x/abstract-banner-with-modern-wireframe-landscape-design-free-vector.jpg)"}}
+          style={{
+            backgroundImage:
+              "url(https://static.vecteezy.com/system/resources/previews/001/339/185/non_2x/abstract-banner-with-modern-wireframe-landscape-design-free-vector.jpg)",
+          }}
         >
           <h1 class="text-white opacity-80 drop-shadow-md text-4xl italic font-bold">
-            Welcome to KindaCode.com
+            We’re A8th Creation — your creative design partner.
           </h1>
         </div>
 
         <div class="p-20 space-y-8">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            imperdiet viverra ante et tincidunt. Nullam mollis, elit consectetur
-            iaculis tempor, ante augue accumsan odio, ut feugiat eros velit sed
-            nibh. Nam eu eros fermentum, aliquam sem at, accumsan augue. Aenean
-            lacus lorem, interdum vel fermentum sed, sodales id libero. Nullam
-            vulputate commodo urna id mattis. Fusce iaculis maximus felis.
-            Nullam et orci at mi ultricies laoreet et eget ipsum. Aliquam luctus
-            posuere efficitur. Mauris scelerisque leo malesuada tellus malesuada
-            accumsan. Ut non metus velit. Vestibulum lectus nulla, ornare a nisl
-            nec, pretium viverra tellus. Phasellus sit amet magna augue. Sed a
-            diam pulvinar metus auctor tincidunt sed quis purus. Donec id lorem
-            diam.
+            At A8th Creation, we don’t just design—we communicate. Our mission
+            is to bridge the gap between brands and their audiences through
+            compelling visual storytelling. Every design we create is guided by
+            purpose, intention, and a deep understanding of your brand’s values.
+            We begin with your vision, study your market, and craft designs that
+            are not only beautiful but functional, strategic, and aligned with
+            your business goals. Whether it's a bold new logo, a striking social
+            media campaign, or a complete branding overhaul, we bring your ideas
+            to life with a perfect balance of creativity and clarity.
           </p>
 
           <p>
             {" "}
-            Donec eros risus, porttitor eget risus vel, pulvinar hendrerit ante.
-            Maecenas quis pretium metus. Vestibulum ante ipsum primis in
-            faucibus orci luctus et ultrices posuere cubilia curae; Nulla
-            facilisi. Nam rutrum, augue et sagittis aliquam, mi nisi lobortis
-            enim, eget egestas sapien urna in turpis. Quisque scelerisque dolor
-            sagittis lorem accumsan, at tempus odio convallis. Nulla venenatis
-            pulvinar ipsum vel auctor. Praesent a enim at erat fringilla
-            lacinia. Aenean eu ultrices ante.
+            Our team thrives on originality, collaboration, and detail. We know
+            that design is not just decoration—it's the first impression, the
+            emotional connection, and the trust-builder between you and your
+            customers. That's why we invest in every line, every color, and
+            every curve to make sure it tells your story authentically and
+            powerfully. With A8th Creation, your design isn’t just a
+            service—it’s an experience.
           </p>
         </div>
       </div>
@@ -250,7 +280,7 @@ const AboutUs = () => {
           <h2 className="text-3xl md:text-4xl font-semibold">
             We say it straight
           </h2>
-          <p className="px-5 md:px-80 mt-4 text-base md:text-lg text-gray-400 md:text-center">
+          <p className="px-5 md:px-60 mt-4 text-base md:text-lg text-gray-400 md:text-center">
             Yeah, that’s right. We talk to each other openly and honestly. Why?
             Because we care about working in an environment where everyone
             communicates directly and respectfully.
@@ -258,66 +288,17 @@ const AboutUs = () => {
         </div>
 
         <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-15 md:px-18 px-7">
-          <div className="w-full">
-            <img
-              src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt=""
-              className="w-20 h-20 rounded-md"
-            />
-            <h2 className="mt-4 font-semibold text-xl">
-              We walk and then we run
-            </h2>
-            <p className="mt-4 text-sm md:text-base">
-              We like to take it one step at a time. We explore our playground,
-              own it, and then expand it to meet new challenges. Each goal sets
-              the stage for the next.
-            </p>
-          </div>
-          <div className="w-full">
-            <img
-              src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt=""
-              className="w-20 h-20 rounded-md"
-            />
-            <h2 className="mt-4 font-semibold text-xl">
-              We walk and then we run
-            </h2>
-            <p className="mt-4 text-sm md:text-base">
-              We like to take it one step at a time. We explore our playground,
-              own it, and then expand it to meet new challenges. Each goal sets
-              the stage for the next.
-            </p>
-          </div>
-          <div className="w-full">
-            <img
-              src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt=""
-              className="w-20 h-20 rounded-md"
-            />
-            <h2 className="mt-4 font-semibold text-xl">
-              We walk and then we run
-            </h2>
-            <p className="mt-4 text-sm md:text-base">
-              We like to take it one step at a time. We explore our playground,
-              own it, and then expand it to meet new challenges. Each goal sets
-              the stage for the next.
-            </p>
-          </div>
-          <div className="w-full">
-            <img
-              src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt=""
-              className="w-20 h-20 rounded-md"
-            />
-            <h2 className="mt-4 font-semibold text-xl">
-              We walk and then we run
-            </h2>
-            <p className="mt-4 text-sm md:text-base">
-              We like to take it one step at a time. We explore our playground,
-              own it, and then expand it to meet new challenges. Each goal sets
-              the stage for the next.
-            </p>
-          </div>
+        {cards.map((card, index) => (
+        <div key={index} className="w-full">
+          <img
+            src={card.img}
+            alt={card.title}
+            className="w-20 h-20 rounded-md border-2 p-1 border-gray-600"
+          />
+          <h2 className="mt-4 font-semibold text-xl">{card.title}</h2>
+          <p className="mt-4 text-sm md:text-base">{card.description}</p>
+        </div>
+      ))}
         </div>
       </div>
       <section className="w-full h-full">
@@ -333,13 +314,13 @@ const AboutUs = () => {
               {Array.isArray(cardData) &&
                 cardData.map((item, index) => (
                   <div>
-                    <div className="w-full md:h-30 h-60 mb-5 m-auto flex gap-2 md:rounded-bl-full rounded-tr-full md:bg-gray-600 bg-amber-300 shadow-lg p-5 px-10">
+                    <div className="w-full md:h-30 h-60 mb-5 m-auto flex flex-col md:flex-row gap-2 md:rounded-bl-full rounded-tr-full md:bg-gray-600 bg-amber-300 shadow-lg p-5 px-10 border-2">
                       <img
                         src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         alt="image"
-                        className="w-20 h-20 rounded-full"
+                        className="w-20 h-20 rounded-full border-2 border-gray-200 bg-gray-800 p-1"
                       />
-                      <p className="px-1 overflow-hidden text-ellipsis max-w-[calc(100%-5rem)]">
+                      <p className="px-1 overflow-hidden text-white text-ellipsis max-w-[calc(100%-5rem)]">
                         A8th Creation is the ultimate solution for the best
                         tools for any creative work. I LOVE IT!!!
                       </p>
@@ -356,7 +337,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      <div className="w-full mt-100 md:px-20 px-5">
+      <div className="w-full mt-100 md:px-20 px-5 pb-10">
         <h2 className="text-3xl font-bold text-blue-900">{faqData.head}</h2>
         <p className="text-gray-600 mt-2 text-left">{faqData.description}</p>
 
