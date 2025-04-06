@@ -4,7 +4,6 @@ import { MainLayout } from "./components/Layouts/MainLayout";
 import Loder from "./components/Loader/Loder";
 import Login from "./components/Login&signup/Login";
 import Admin_Panel from "./Admin_panel/Admin_Panel";
-import ProtectRoute from "./actions/ProtectRoutes";
 import ViewLayout from "./components/Layouts/ViewLayout";
 import Profile from "./components/Profile/Profile";
 
@@ -46,7 +45,7 @@ function App() {
         <Route path="/admin" element={<Admin_Panel />} />
         <Route path="/login" element={<Login />} />
         <Route element={<MainLayout />}>
-          <Route path="/" element={<ProtectRoute><Dashboard /></ProtectRoute>} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/exploreAll" element={<ExploreAll />} />
