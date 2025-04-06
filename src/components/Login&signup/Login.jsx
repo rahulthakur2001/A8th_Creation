@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Postapi from "../../APIs/Postapi";
+import Postapi, { postApi } from "../../APIs/Postapi";
 import { toast, ToastContainer } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { loginFailure, loginStart, loginSuccess } from "../../Slices/authSlice";
+import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import { useDispatch } from "react-redux";
-import { setAuthData } from "../../actions/authActions";
 
 const Login = () => {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
@@ -12,8 +12,10 @@ const Login = () => {
   const [isOtpActive, setIsOtpActive] = useState(false);
   const [form, setForm] = useState();
   const [otp, setOtp] = useState();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {loading, error} = useSelector((state) => state.auth)
+
   const handleform = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -56,32 +58,53 @@ const Login = () => {
   }
 
   // Login API
-  const loginApi = async (data) => {
+  const loginUser = (email, password) => async (dispatch) => {
+    dispatch(loginStart());
+  
     try {
-      const response = await Postapi("auth/login", data);
-      console.log(response);
+      const response = await postApi('auth/login', { email, password });
   
-      if (response && response.token) {
-        Cookies.set("token", response.token, { expires: 7, secure: true, sameSite: "Strict" });
+      if (response && response.success) {
+        // Set token in cookies
+        Cookies.set('token', response.token, { expires: 7, secure: true, sameSite: 'Strict' });
   
-        dispatch(setAuthData(response.token, response.user));
+        // Dispatch login success
+        dispatch(loginSuccess({
+          user: response.user,
+          token: response.token,
+        }));
   
-        toast.success(response.message);
-        navigate("/");  
+        // Show success toast
+        toast.success("Login successfully !");
+        navigate('/')
       } else {
-        toast.error("No token received. Please try again.");
+        // Dispatch failure
+        dispatch(loginFailure(response.message || 'Login failed: Invalid credentials or other error.'));
+        
+        // Show error toast
+        toast.error(response.message || 'Login failed: Invalid credentials or other error.');
       }
-    } catch (e) {
-      if (e.response) {
-        toast.error(e.response.data.message || "An error occurred during login.");
-      } else {
-        toast.error("Something went wrong. Please try again.");
-      }
-      console.log(e);
+    } catch (error) {
+      // Handle network or unexpected errors
+      const errorMessage = error?.response?.data?.message || error.message || 'An unknown error occurred during login.';
+      
+      // Dispatch failure
+      dispatch(loginFailure(errorMessage));
+  
+      // Show error toast
+      toast.error(errorMessage);
     }
   };
   
 
+  
+  const handleLogin = (e) => {
+    console.log("handleLogin");
+    
+    e.preventDefault();
+    dispatch(loginUser(form.email, form.password)); // Call loginUser action with form data
+  }
+  
 
   const handleOtpSubmit = () => {
     OtpVerify(otp);
@@ -90,10 +113,6 @@ const Login = () => {
   const handlesignin = (e) => {
     e.preventDefault();
     signup(form);
-  }
-  const handleLogin = (e) => {
-    e.preventDefault();
-    loginApi(form);
   }
 
 
