@@ -18,6 +18,7 @@ import { IoMdImages, IoMdNotifications } from "react-icons/io";
 import { MdManageHistory } from "react-icons/md";
 import { IoStar, IoStarOutline } from "react-icons/io5";
 import { Admin_setting } from "./Admin_setting";
+import { CgClose } from "react-icons/cg";
 
 const Admin_Panel = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -264,6 +265,7 @@ const DashboardContent = () => {
             </div>
           </div>
         ))}
+        
       </div>
 
       {/* Visitors Section */}
@@ -292,70 +294,69 @@ const DashboardContent = () => {
 const ImageStatusContent = () => {
   const orders = [
     {
-      id: 1532,
+      id: 1,
+      img: logo,
+      imgtitle: "inst logo power",
       client: "John Carter",
       email: "hello@johncarter.com",
       date: "Jan 30, 2024",
-      status: "Delivered",
-      country: "United States",
-      total: "$1,099.24",
-      statusColor: "bg-green-600",
     },
     {
-      id: 1531,
+      id: 2,
+      img: logo,
+      imgtitle: "inst logo",
       client: "Sophie Moore",
       email: "contact@sophiemoore.com",
       date: "Jan 27, 2024",
-      status: "Canceled",
-      country: "United Kingdom",
-      total: "$5,870.32",
-      statusColor: "bg-red-600",
     },
     {
-      id: 1530,
+      id: 3,
+      img: logo,
+      imgtitle: "inst logo",
       client: "Matt Cannon",
       email: "info@mattcannon.com",
       date: "Jan 24, 2024",
-      status: "Delivered",
-      country: "Australia",
-      total: "$13,899.48",
-      statusColor: "bg-green-600",
     },
     {
-      id: 1529,
+      id: 4,
+      img: logo,
+      imgtitle: "inst logo",
       client: "Graham Hills",
       email: "hi@grahamhills.com",
       date: "Jan 21, 2024",
-      status: "Pending",
-      country: "India",
-      total: "$1,569.12",
-      statusColor: "bg-yellow-600",
     },
     {
-      id: 1528,
+      id: 5,
+      img: logo,
+      imgtitle: "inst logo",
       client: "Sandy Houston",
       email: "contact@sandyhouston.com",
       date: "Jan 18, 2024",
-      status: "Delivered",
-      country: "Canada",
-      total: "$899.16",
-      statusColor: "bg-green-600",
     },
   ];
   const [currentPage, setCurrentPage] = useState(1);
-  const ordersPerPage = 3;
+  const ordersPerPage = 10;
   const totalPages = Math.ceil(orders.length / ordersPerPage);
 
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleImageClick = () => {
+    setShowPopup(true);
+  };
+
+  const handleClose = () => {
+    setShowPopup(false);
+  };
 
   return (
     <div>
       <div className="text-3xl font-bold mb-5">Image Status</div>
       <div className="bg-[#0b1739] p-6 rounded-xl text-white w-full">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Orders Status</h2>
+          <h2 className="text-2xl font-bold">All Image Status</h2>
           <div className="flex items-center space-x-2">
             <div className="relative">
               <input
@@ -365,53 +366,72 @@ const ImageStatusContent = () => {
               />
               <BiSearch className="absolute left-2 top-2.5 text-gray-500" />
             </div>
-            <button className="bg-purple-600 px-4 py-2 rounded-md">
-              Create Order
-            </button>
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="text-gray-400">
-                <th className="p-3">
-                  <input type="checkbox" />
-                </th>
-                <th className="p-3">Order</th>
-                <th className="p-3">Client</th>
+              <tr className="text-gray-400 text-center">
+                <th className="p-3">S.No</th>
+                <th className="p-3">Image</th>
+                <th className="p-3">Title</th>
+                <th className="p-3">User detail</th>
                 <th className="p-3">Date</th>
                 <th className="p-3">Status</th>
-                <th className="p-3">Country</th>
-                <th className="p-3">Total</th>
                 <th className="p-3">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-center">
               {currentOrders.map((order) => (
                 <tr key={order.id} className="border-t border-gray-700">
-                  <td className="p-3">
-                    <input type="checkbox" />
-                  </td>
                   <td className="p-3">#{order.id}</td>
+                  <td className="p-3">
+                    <img
+                      src={order.img}
+                      alt={order.imgtitle}
+                      className="w-15 h-10 object-contain border-1 rounded cursor-pointer"
+                      onClick={handleImageClick}
+                    />
+                  </td>
+                  {/* Popup modal */}
+                  {showPopup && (
+                    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+                      <div className="relative bg-white p-4 rounded shadow-lg max-w-[90%] max-h-[90%]">
+                        {/* Close Button */}
+                        <button
+                          onClick={handleClose}
+                          className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                        >
+                          <CgClose className="cursor-pointer"/>
+                        </button>
+
+                        {/* Full Image */}
+                        <img
+                          src={order.img}
+                          alt={order.imgtitle}
+                          className="max-w-full max-h-[80vh] object-contain rounded"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  <td className="p-3">{order.imgtitle}</td>
                   <td className="p-3">
                     {order.client} <br />
                     <span className="text-gray-400 text-sm">{order.email}</span>
                   </td>
                   <td className="p-3">{order.date}</td>
                   <td className="p-3">
-                    <span
-                      className={`px-3 py-1 rounded-lg text-xs ${order.statusColor}`}
-                    >
-                      {order.status}
+                    <span className="flex gap-2 items-center justify-center text-xs p-3">
+                      <button className="bg-green-600 py-1 px-3 rounded-lg cursor-pointer">
+                        Accept
+                      </button>
+                      <button className="bg-red-600 py-1 px-3 rounded-lg cursor-pointer">
+                        Decline
+                      </button>
                     </span>
                   </td>
-                  <td className="p-3">{order.country}</td>
-                  <td className="p-3">{order.total}</td>
-                  <td className="p-3 flex space-x-2">
-                    <button className="text-gray-400 hover:text-white">
-                      <BiEdit />
-                    </button>
+                  <td className="p-3 text-center">
                     <button className="text-gray-400 hover:text-white">
                       <BiTrash />
                     </button>

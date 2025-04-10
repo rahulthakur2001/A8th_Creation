@@ -4,9 +4,26 @@ import pic1 from "../../assets/logo.png";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { IoMdImages } from "react-icons/io";
 import { FaDownload, FaHeart, FaRegHeart, FaSearch } from "react-icons/fa";
+import { BiSolidImageAdd } from "react-icons/bi";
 
 const ExploreAll = () => {
   const [activetab, setActivetab] = useState("Images");
+  const [isOpen, setIsOpen] = useState(false);
+  const [file, setFile] = useState(null);
+  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("");
+  const [uploader, setUploader] = useState("");
+
+  const handleUpload = () => {
+    console.log({
+      file,
+      category,
+      title,
+      uploader,
+    });
+    setIsOpen(false); // Close popup after upload
+  };
+
   const data = {
     title: "Popular",
     categories: ["Filters", "Photos", "PSD", "Vectors", "All Images"],
@@ -79,16 +96,126 @@ const ExploreAll = () => {
       </div>
 
       {/* Categories */}
-      <div className="flex gap-4 mt-4">
-        {data.categories.map((category, index) => (
-          <button
-            key={index}
-            className="bg-gray-200 px-4 py-2 rounded text-gray-700 hover:bg-gray-300"
-          >
-            {category}
-          </button>
-        ))}
+      <div className="flex items-center justify-between mt-4">
+        <div className="flex gap-4">
+          {data.categories.map((category, index) => (
+            <button
+              key={index}
+              className="bg-gray-200 px-4 py-2 rounded text-gray-700 hover:bg-gray-300"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-cyan-700 px-4 py-2 rounded text-white hover:bg-cyan-900 flex items-center gap-1.5 cursor-pointer"
+        >
+          <BiSolidImageAdd size={20} />
+          Upload
+        </button>
       </div>
+      {/* Popup for uplaod image */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-4xl h-100 flex flex-col md:flex-row gap-6">
+            {/* Left Side - File Upload */}
+            <div class="flex flex-col items-center justify-center w-[55%] h-85 my-2 bg-gray-50 sm:rounded-lg sm:shadow">
+              <div class="mb-10 text-center">
+                <h2 class="text-2xl font-semibold mb-1">Upload your files</h2>
+                <p class="text-xs text-gray-500">
+                  File should be of format .mp4, .avi, .mov or .mkv
+                </p>
+              </div>
+              <form
+                action="#"
+                class="relative w-100 h-40 p-10 mb-5 bg-gray-200 rounded-lg shadow-inner"
+              >
+                <input
+                  type="file"
+                  id="file-upload"
+                  class="hidden"
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+                <label
+                  for="file-upload"
+                  class="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer"
+                >
+                  <p class="z-10 text-xs font-light text-center text-gray-500">
+                    Drag & Drop your files here
+                  </p>
+                  <svg
+                    class="z-10 w-8 h-8 text-indigo-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+                  </svg>
+                </label>
+              </form>
+            </div>
+
+            {/* Right Side - Form */}
+            <div className="flex-1 flex flex-col gap-4 pt-10">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Picture Title
+                </label>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="border rounded px-3 py-2 w-full"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Uploader Name
+                </label>
+                <input
+                  type="text"
+                  value={uploader}
+                  onChange={(e) => setUploader(e.target.value)}
+                  className="border rounded px-3 py-2 w-full"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Category
+                </label>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="border rounded px-3 py-2 w-full"
+                >
+                  <option value="">Select Category</option>
+                  <option value="nature">Nature</option>
+                  <option value="tech">Tech</option>
+                  <option value="art">Art</option>
+                </select>
+              </div>
+
+              <button
+                onClick={handleUpload}
+                className="bg-cyan-700 p-4 rounded text-white hover:bg-cyan-900 mt-2"
+              >
+                Upload
+              </button>
+            </div>
+          </div>
+
+          {/* Close Button (Optional) */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-27 right-49 text-red-600 text-xl font-bold cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* Images Section */}
       <div className="flex items-center space-x-4 text-[16px] my-5">
@@ -116,16 +243,13 @@ const ExploreAll = () => {
         </div>
       </div>
       {activetab === "Images" && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {data.images.map((image) => (
-            <div
-              key={image.id}
-              className={`overflow-hidden rounded-lg`}
-            >
-              <ImageCard image={image} />
-            </div>
-          ))}
-        </div>
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
+        {data.images.map((image) => (
+          <div key={image.id} className="break-inside-avoid overflow-hidden rounded-lg">
+            <ImageCard image={image} />
+          </div>
+        ))}
+      </div>
       )}
       {activetab === "Collection" && (
         <div className="grid grid-cols-1 md:grid-cols-3 h-80 gap-6 mt-4">
