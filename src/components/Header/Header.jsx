@@ -110,6 +110,14 @@ export default function Header() {
         >
           <div className="flex flex-col text-left">
             <Link
+              to="/"
+              className={`text-lg font-semibold ${
+                isActive("/") ? "text-teal-900" : ""
+              }`}
+            >
+              Home
+            </Link>
+            <Link
               to="/about"
               className={`text-lg font-semibold ${
                 isActive("/about") ? "text-teal-900" : ""
@@ -126,12 +134,12 @@ export default function Header() {
               Contact Us
             </Link>
             <Link
-              to="/blog"
+              to="/exploreAll"
               className={`text-lg font-semibold ${
-                isActive("/blog") ? "text-teal-900" : ""
+                isActive("/exploreAll") ? "text-teal-900" : ""
               }`}
             >
-              Blog
+              Explore All
             </Link>
             <Link to="/login" className="text-lg font-semibold">
               Log in
