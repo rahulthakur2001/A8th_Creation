@@ -1,10 +1,9 @@
 import { useState } from "react";
-import Postapi, { postApi } from "../../APIs/Postapi";
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginFailure, loginStart, loginSuccess } from "../../Slices/authSlice";
-import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import PostApi from "../../APIs/Postapi";
 
 const Login = () => {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
@@ -24,7 +23,7 @@ const Login = () => {
   // Register API 
   const signup = async (data) => {
     try {
-      const response = await Postapi("auth/register", data);
+      const response = await PostApi("auth/register", data);
       toast.success(response.message);
       setIsOtpActive(true);
     } catch (e) {
@@ -41,7 +40,7 @@ const Login = () => {
   // OTP verify API
   const OtpVerify = async (data) => {
     try {
-      const response = await Postapi("auth/verify-otp", { otp: data })
+      const response = await PostApi("auth/verify-otp", { otp: data })
         .then((response) => {
           toast.success(response.message);
           setIsOtpActive(false)
@@ -62,45 +61,33 @@ const Login = () => {
     dispatch(loginStart());
   
     try {
-      const response = await postApi('auth/login', { email, password });
+      const response = await PostApi('auth/login', { email, password });
   
       if (response && response.success) {
-        // Set token in cookies
-        Cookies.set('token', response.token, { expires: 7, secure: true, sameSite: 'Strict' });
-  
-        // Dispatch login success
-        dispatch(loginSuccess({
-          user: response.user,
-          token: response.token,
-        }));
-  
-        // Show success toast
-        toast.success("Login successfully !");
-        navigate('/')
+        dispatch(
+          loginSuccess({
+            user: response.user,
+            token: response.token, 
+          })
+        );
+        toast.success("Login successfully!");
+        navigate("/"); 
       } else {
-        // Dispatch failure
-        dispatch(loginFailure(response.message || 'Login failed: Invalid credentials or other error.'));
-        
-        // Show error toast
-        toast.error(response.message || 'Login failed: Invalid credentials or other error.');
+        dispatch(loginFailure(response.message || "Login failed"));
+        toast.error(response.message || "Login failed");
       }
     } catch (error) {
-      // Handle network or unexpected errors
-      const errorMessage = error?.response?.data?.message || error.message || 'An unknown error occurred during login.';
-      
-      // Dispatch failure
+      const errorMessage =
+        error?.response?.data?.message || error.message || "Unknown error";
       dispatch(loginFailure(errorMessage));
-  
-      // Show error toast
       toast.error(errorMessage);
     }
   };
   
+  
 
   
-  const handleLogin = (e) => {
-    console.log("handleLogin");
-    
+  const handleLogin = (e) => {    
     e.preventDefault();
     dispatch(loginUser(form.email, form.password)); // Call loginUser action with form data
   }

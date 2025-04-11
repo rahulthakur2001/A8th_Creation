@@ -1,38 +1,40 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState ={
-    user:null,
-    token:null,
-    loading:null,
-    error:null,
-}
+const initialState = {
+  user: null,
+  token: null,
+  loading: true,
+  error: null,
+};
 
 const authSlice = createSlice({
-    name:'auth',
-    initialState,
-    reducers:{
-        loginStart:(state) =>{
-            state.loading = true
-            state.error = null
-        },
-        loginSuccess:(state, action) =>{
-            state.loading = false
-            state.user = action.payload.user
-            state.token = action.payload.token
-            localStorage.setItem("token", action.payload.token)
-        },
-        loginFailure:(state, action) =>{
-            state.loading = false
-            state.error = action.payload
-        },
-        logout:(state) =>{
-            state.user = null
-            state.token = null
-            localStorage.removeItem("token")
-        },
+  name: "auth",
+  initialState,
+  reducers: {
+    loginStart: (state) => {
+      state.loading = true;
+      state.error = null;
     },
-})
+    loginSuccess: (state, action) => {
+      state.loading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.error = null;
+    },
+    loginFailure: (state, action) => {
+      state.loading = false;
+      state.user = null;
+      state.token = null;
+      state.error = action.payload;
+    },
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.loading = false;
+      state.error = null;
+    },
+  },
+});
 
-
-export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions
+export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
 export default authSlice.reducer;
