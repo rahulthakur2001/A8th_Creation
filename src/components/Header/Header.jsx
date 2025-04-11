@@ -158,9 +158,6 @@ export default function Header() {
               className={`text-lg font-semibold ${
                 isActive("/exploreAll") ? "text-teal-900" : ""
               }`}
-              to="/blog"
-              className={`text-lg font-semibold ${isActive("/blog") ? "text-teal-900" : ""
-                }`}
             >
               Explore All
             </Link>

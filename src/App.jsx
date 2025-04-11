@@ -43,7 +43,7 @@ function App() {
 
   return (
     <>
-    <AutoLogin/>
+    {/* <AutoLogin/> */}
     <Suspense fallback={<Loder />}>
       <Routes>
         <Route path="/admin" element={<Admin_Panel />} />
@@ -65,7 +65,7 @@ function App() {
 }
 
 function AppWrapper() {
-  AutoLogin();
+  // AutoLogin();
   return (
     <BrowserRouter>
       <App />

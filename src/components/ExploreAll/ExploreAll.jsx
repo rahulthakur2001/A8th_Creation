@@ -7,6 +7,7 @@ import Getapi from "../../APIs/Getapi";
 import { toast } from "react-toastify";
 
 const ExploreAll = () => {
+  const [loading, setLoading] = useState(false);
   const [activetab, setActivetab] = useState("Images");
   const [isOpen, setIsOpen] = useState(false);
   const [file, setFile] = useState(null);
@@ -16,15 +17,16 @@ const ExploreAll = () => {
   const [images, setImages] = useState([]);
 
   const handleUploadImage = async () => {
+    setLoading(true); // start loading
     try {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("image", file);
       formData.append("category", category);
       formData.append("description", uploader);
-
+  
       const response = await PostApiFile("image/add", formData);
-
+  
       if (response) {
         toast.success(response?.data?.message || "Upload successful!");
         setTitle("");
@@ -40,8 +42,11 @@ const ExploreAll = () => {
         error?.response?.data?.message ||
         "Upload failed. Please check your input or try again.";
       toast.error(errorMsg);
+    } finally {
+      setLoading(false); // stop loading
     }
   };
+  
 
   const getAllImages = async () => {
     try {
@@ -159,11 +164,39 @@ const ExploreAll = () => {
                 className="border px-3 py-2 rounded"
               />
               <button
-                onClick={handleUploadImage}
-                className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900"
-              >
-                Upload
-              </button>
+  onClick={handleUploadImage}
+  className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900 flex items-center justify-center"
+  disabled={loading}
+>
+  {loading ? (
+    <span className="flex items-center gap-2">
+      <svg
+        className="animate-spin h-5 w-5 text-white"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        ></circle>
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v8z"
+        ></path>
+      </svg>
+      Uploading...
+    </span>
+  ) : (
+    "Upload"
+  )}
+</button>
+
             </div>
           </div>
 
