@@ -231,25 +231,25 @@ const AboutUs = () => {
       </div>
 
       <div>
-        <div class="p-18 bg-sky-200">
-          <h3 class="text-2xl animate-bounce font-bold text-gray-800 text-center">
+        <div className="p-18 bg-sky-200">
+          <h3 className="text-2xl animate-bounce font-bold text-gray-800 text-center">
             Design With Purpose.
           </h3>
         </div>
 
         <div
-          class="w-full h-96 bg-fixed bg-cover bg-center flex justify-center items-center"
+          className="w-full h-96 bg-fixed bg-cover bg-center flex justify-center items-center"
           style={{
             backgroundImage:
               "url(https://static.vecteezy.com/system/resources/previews/001/339/185/non_2x/abstract-banner-with-modern-wireframe-landscape-design-free-vector.jpg)",
           }}
         >
-          <h1 class="text-white opacity-80 drop-shadow-md text-4xl italic font-bold">
+          <h1 className="text-white opacity-80 drop-shadow-md text-4xl italic font-bold">
             We’re A8th Creation — your creative design partner.
           </h1>
         </div>
 
-        <div class="p-20 space-y-8">
+        <div className="p-20 space-y-8">
           <p>
             At A8th Creation, we don’t just design—we communicate. Our mission
             is to bridge the gap between brands and their audiences through

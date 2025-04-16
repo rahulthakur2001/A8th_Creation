@@ -43,34 +43,34 @@ function App() {
 
   return (
     <>
-    {/* <AutoLogin/> */}
-    <Suspense fallback={<Loder />}>
-      <Routes>
-        <Route path="/admin" element={<Admin_Panel />} />
-        <Route path="/login" element={<Login />} />
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/exploreAll" element={<ProtectedRoute element={<ExploreAll />} />} />
+      <Suspense fallback={<Loder />}>
+        <Routes>
+          <Route path="/admin" element={<Admin_Panel />} />
+          <Route path="/login" element={<Login />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/exploreAll" element={<ProtectedRoute element={<ExploreAll />} />} />
           </Route>
-        <Route element={<ViewLayout />}>
-          <Route path="/profile" element={<Profile />} />
+          <Route element={<ViewLayout />}>
+            <Route path="/profile" element={<Profile />} />
 
-        </Route>
-      </Routes>
-    </Suspense>
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   );
 }
 
 function AppWrapper() {
-  // AutoLogin();
   return (
     <BrowserRouter>
+      <AutoLogin />
       <App />
     </BrowserRouter>
   );
 }
+
 
 export default AppWrapper;

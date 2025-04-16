@@ -10,7 +10,6 @@ const AutoLogin = () => {
     const fetchUser = async () => {
       try {
         const res = await Getapi('auth/me');
-
         if (res.data.success) {
           dispatch(loginSuccess({ user: res.data.user, token: res.data.token }));
         } else {
