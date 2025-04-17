@@ -5,6 +5,7 @@ import image from "../../assets/animation.gif";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { MdHighQuality, MdOtherHouses } from "react-icons/md";
 import { PiDownloadDuotone } from "react-icons/pi";
+import mahadev from "../../assets/MahadevWallper.jpg";
 
 const Typewriter = ({ texts, period = 2000 }) => {
   const [text, setText] = useState("");
@@ -48,32 +49,32 @@ const TypewriterComponent = () => {
   const iconFamilies = [
     {
       title: "Special Lineal",
-      imgSrc: "https://via.placeholder.com/300",
+      imgSrc: mahadev,
       author: "Freepik",
     },
     {
       title: "Basic Rounded Lineal",
-      imgSrc: "https://via.placeholder.com/300",
+      imgSrc: null, // Changed from empty string to null
       author: "Freepik",
     },
     {
       title: "Special Lineal Color",
-      imgSrc: "https://via.placeholder.com/300",
+      imgSrc: mahadev,
       author: "Freepik",
     },
     {
       title: "Special Lineal Color",
-      imgSrc: "https://via.placeholder.com/300",
+      imgSrc: mahadev,
       author: "Freepik",
     },
     {
       title: "Special Lineal Color",
-      imgSrc: "https://via.placeholder.com/300",
+      imgSrc: mahadev,
       author: "Freepik",
     },
     {
       title: "Special Lineal Color",
-      imgSrc: "https://via.placeholder.com/300",
+      imgSrc: mahadev,
       author: "Freepik",
     },
   ];
@@ -97,7 +98,7 @@ const TypewriterComponent = () => {
         icon: <MdOtherHouses size={30} />,
         title: "Commercial or personal use",
         description:
-          "You can create any kind of projects. Just make sure you follow Freepik’s usage rules.",
+          "You can create any kind of projects. Just make sure you follow Freepik's usage rules.",
       },
     ],
   };
@@ -123,7 +124,7 @@ const TypewriterComponent = () => {
         "Absolutely! You are allowed to modify images to fit your needs, but redistribution of the edited versions may be restricted.",
     },
     {
-      question: "What’s the difference between free and premium images?",
+      question: "What's the difference between free and premium images?",
       answer:
         "Free images may require attribution and have limited resolutions, while premium images come with higher quality, exclusive rights, and no attribution requirements.",
     },
@@ -160,7 +161,7 @@ const TypewriterComponent = () => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold">
-              Curated icon families for{" "}
+              Curated icon families for
               <span className="text-blue-600">seamless design </span>
             </h2>
             <p className="text-gray-600">
@@ -177,11 +178,17 @@ const TypewriterComponent = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           {iconFamilies.map((family, index) => (
             <div key={index} className="border rounded-lg p-4 h-50 shadow-sm">
-              <img
-                src={family.imgSrc}
-                alt={family.title}
-                className="w-full rounded-md"
-              />
+              {family.imgSrc ? (
+                <img
+                  src={family.imgSrc}
+                  alt={family.title}
+                  className="w-full rounded-md"
+                />
+              ) : (
+                <div className="w-full h-40 bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
+                  No Image
+                </div>
+              )}
               <h3 className="mt-3 font-semibold">{family.title}</h3>
               <p className="text-sm text-gray-500">
                 icons by <span className="text-blue-500">{family.author}</span>
@@ -195,78 +202,70 @@ const TypewriterComponent = () => {
         </div>
       </section>
 
-      <section class="bg-zinc-50 overflow-hidden">
-        <div class="max-w-screen-xl 2xl:max-w-screen-3xl px-8 md:px-12 mx-auto py-12 lg:py-24 space-y-24 h-svh flex flex-col justify-center">
-          <div class="flex flex-col sm:flex-row mx-auto">
+      <section className="bg-zinc-50 overflow-hidden">
+        <div className="max-w-screen-xl 2xl:max-w-screen-3xl px-8 md:px-12 mx-auto py-12 lg:py-24 space-y-24 h-svh flex flex-col justify-center">
+          <div className="flex flex-col sm:flex-row mx-auto">
             <a href="#_">
-              {" "}
               <img
                 src="https://images.unsplash.com/photo-1530035415911-95194de4ebcc?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
-                alt="#_"
+                className="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                alt="Creative design image"
               />
             </a>
             <a href="#_">
               <img
-                src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?q=80&amp;w=2672&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D "
-                class="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
-                alt="#_"
-              />{" "}
+                src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?q=80&amp;w=2672&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                alt="Design workspace"
+              />
             </a>
             <a href="#_">
-              {" "}
               <img
                 src="https://images.unsplash.com/photo-1586996292898-71f4036c4e07?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
-                alt="#_"
-              />{" "}
+                className="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                alt="Creative materials"
+              />
             </a>
             <a href="#_">
-              {" "}
               <img
                 src="https://images.unsplash.com/photo-1522775417749-29284fb89f43?q=80&amp;w=2574&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
-                alt="#_"
-              />{" "}
+                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                alt="Design inspiration"
+              />
             </a>
             <a href="#_">
-              {" "}
               <img
                 src="https://images.unsplash.com/photo-1522775417749-29284fb89f43?q=80&amp;w=2574&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
-                alt="#_"
-              />{" "}
+                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                alt="Creative workspace"
+              />
             </a>
           </div>
         </div>
       </section>
 
-      <div class="relative">
-        <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-200 to-blue-200">
-          <h2 class="text-4xl font-bold">The First slide</h2>
-          <p class="mt-2">Scroll Down for next slide</p>
+      <div className="relative">
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-200 to-blue-200">
+          <h2 className="text-4xl font-bold">The First slide</h2>
+          <p className="mt-2">Scroll Down for next slide</p>
         </div>
-        <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-800 to-purple-800 text-white">
-          <h2 class="text-4xl font-bold">The Second slide</h2>
-          <p class="mt-2">Scroll Down for next slide</p>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-800 to-purple-800 text-white">
+          <h2 className="text-4xl font-bold">The Second slide</h2>
+          <p className="mt-2">Scroll Down for next slide</p>
         </div>
-        <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-800 to-pink-800 text-white">
-          <h2 class="text-4xl font-bold">The Third slide</h2>
-          <p class="mt-2">Scroll Down</p>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-800 to-pink-800 text-white">
+          <h2 className="text-4xl font-bold">The Third slide</h2>
+          <p className="mt-2">Scroll Down</p>
         </div>
-        <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-200 to-indigo-100 text-black">
-          <h2 class="text-4xl font-bold">The Fourth slide</h2>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-200 to-indigo-100 text-black">
+          <h2 className="text-4xl font-bold">The Fourth slide</h2>
         </div>
       </div>
 
       <section className="text-center py-15 px-4">
         <h2 className="text-4xl font-semibold text-gray-900">
-          {data.title.split("icon library")}
-          {data.title.split("The biggest free").map((part, index) => (
-            <span key={index} className={index === 1 ? "text-blue-500" : ""}>
-              {part}
-            </span>
-          ))}
+          {data.title.split(" icon library")[0]}
+          <span className="text-blue-500"> icon library</span>
         </h2>
         <p className="text-gray-500 mt-2">{data.subtitle}</p>
 
