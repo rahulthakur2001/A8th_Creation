@@ -6,6 +6,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { MdHighQuality, MdOtherHouses } from "react-icons/md";
 import { PiDownloadDuotone } from "react-icons/pi";
 import mahadev from "../../assets/MahadevWallper.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Typewriter = ({ texts, period = 2000 }) => {
   const [text, setText] = useState("");
@@ -46,6 +47,11 @@ const Typewriter = ({ texts, period = 2000 }) => {
 };
 
 const TypewriterComponent = () => {
+  const navigate  = useNavigate();
+  const handlenavigate = () => {
+    navigate("/exploreAll");
+  }
+
   const iconFamilies = [
     {
       title: "Special Lineal",
@@ -152,7 +158,7 @@ const TypewriterComponent = () => {
         <span className="mt-2">
           10M+ free PNG and SVG icons, including the one you have in mind
         </span>
-        <button className="flex items-center gap-2 border-2 rounded-sm p-2 mt-7 bg-cyan-800 hover:bg-cyan-900 cursor-pointer">
+        <button onClick={handlenavigate} className="flex items-center gap-2 border-2 rounded-sm p-2 mt-7 bg-cyan-800 hover:bg-cyan-900 cursor-pointer">
           Explore Now <FaChevronCircleRight size={18} />
         </button>
       </div>
@@ -161,7 +167,7 @@ const TypewriterComponent = () => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold">
-              Curated icon families for
+              Curated icon families for{" "}
               <span className="text-blue-600">seamless design </span>
             </h2>
             <p className="text-gray-600">
@@ -170,14 +176,14 @@ const TypewriterComponent = () => {
             </p>
           </div>
           <div className="mt-6 text-right">
-            <button className="px-4 py-2 border rounded-md text-blue-600 hover:bg-gray-100">
+            <button onClick={handlenavigate} className="px-4 py-2 border rounded-md text-blue-600 hover:bg-gray-100">
               Discover more
             </button>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           {iconFamilies.map((family, index) => (
-            <div key={index} className="border rounded-lg p-4 h-50 shadow-sm">
+            <div key={index} className="border rounded-lg p-4 h-80 shadow-sm">
               {family.imgSrc ? (
                 <img
                   src={family.imgSrc}
@@ -185,7 +191,7 @@ const TypewriterComponent = () => {
                   className="w-full rounded-md"
                 />
               ) : (
-                <div className="w-full h-40 bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
+                <div className="w-full h-46 bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
                   No Image
                 </div>
               )}

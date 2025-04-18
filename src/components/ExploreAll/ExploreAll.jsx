@@ -5,6 +5,7 @@ import { BiSolidImageAdd } from "react-icons/bi";
 import PostApiFile from "../../APIs/PostApiFile";
 import Getapi from "../../APIs/Getapi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ExploreAll = () => {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,16 @@ const ExploreAll = () => {
   const [title, setTitle] = useState("");
   const [uploader, setUploader] = useState("");
   const [images, setImages] = useState([]);
+  const navigate = useNavigate();
+
+  const handleUploadClick = () => {
+    const isAuthenticated = localStorage.getItem('token'); // or any auth logic
+    if (isAuthenticated) {
+      setIsOpen(true);
+    } else {
+      navigate('/login');
+    }
+  };
 
   const handleUploadImage = async () => {
     setLoading(true); // start loading
@@ -93,7 +104,7 @@ const ExploreAll = () => {
           ))}
         </div>
         <button
-          onClick={() => setIsOpen(true)}
+          onClick={handleUploadClick}
           className="bg-cyan-700 px-4 py-2 rounded text-white hover:bg-cyan-900 flex items-center gap-1.5"
         >
           <BiSolidImageAdd size={20} />

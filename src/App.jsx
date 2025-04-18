@@ -51,7 +51,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
-            <Route path="/exploreAll" element={<ProtectedRoute element={<ExploreAll />} />} />
+            <Route path="/exploreAll" element={<ExploreAll />} />
           </Route>
           <Route element={<ViewLayout />}>
             <Route path="/profile" element={<Profile />} />
