@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { BiBell, BiDownload } from "react-icons/bi";
 import { FiMoreHorizontal } from "react-icons/fi";
 import Getapi from "../APIs/Getapi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logout } from "../Slices/authSlice";
@@ -14,6 +14,7 @@ export const DashboardContent = () => {
   const profileRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
 
   // Close profile menu when clicking outside
   useEffect(() => {
@@ -93,7 +94,7 @@ export const DashboardContent = () => {
             className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center cursor-pointer"
             onClick={() => setShowProfileMenu(!showProfileMenu)}
           >
-            <span className="text-xs font-medium">MJ</span>
+            <span className="text-xs font-medium">{user.name.substring(0, 2).toUpperCase()}</span>
           </div>
         </div>
         {showProfileMenu && (
@@ -107,8 +108,8 @@ export const DashboardContent = () => {
                   <span className="text-white">JC</span>
                 </div>
                 <div className="ml-3">
-                  <div className="text-white">John Carter</div>
-                  <div className="text-gray-400 text-sm">john@example.com</div>
+                  <div className="text-white">{user.name}</div>
+                  <div className="text-gray-400 text-sm">{user.email}</div>
                 </div>
               </div>
             </div>

@@ -11,10 +11,11 @@ import { MdManageHistory } from "react-icons/md";
 import { Admin_setting } from "./Admin_setting";
 import { DashboardContent } from "./DashboardContent";
 import { ImageStatusContent } from "./ImageStatusContent";
-import { UsersContent } from "./UsersContent";
+import UsersContent  from "./UsersContent";
 import { AllImagesContent } from "./AllImagesContent";
 import { ManageContent } from "./ManageContent";
 import { NotificationContent } from "./NotificationContent";
+import Admin_Upload from "./Admin_Upload";
 
 const Admin_Panel = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -30,6 +31,8 @@ const Admin_Panel = () => {
         return <UsersContent />;
       case "AllImages":
         return <AllImagesContent />;
+      case "UploadImages":
+        return <Admin_Upload />;
       case "Manage":
         return <ManageContent />;
       case "Settings":
@@ -70,6 +73,11 @@ const Admin_Panel = () => {
               name: "All Images",
               icon: <IoMdImages size={18} />,
               tab: "AllImages",
+            },
+            {
+              name: "Upload Images",
+              icon: <IoMdImages size={18} />,
+              tab: "UploadImages",
             },
             {
               name: "Updates & Manage",

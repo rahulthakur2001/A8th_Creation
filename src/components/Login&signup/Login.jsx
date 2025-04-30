@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginFailure, loginStart, loginSuccess } from "../../Slices/authSlice";
@@ -10,15 +10,33 @@ const Login = () => {
   const [isForgotPasswordActive, setIsForgotPasswordActive] = useState(false);
   const [isOtpActive, setIsOtpActive] = useState(false);
   const [form, setForm] = useState();
-  const [otp, setOtp] = useState();
+  const [otp, setOtp] = useState(["", "", "", "", ""]);
+  const otpRefs = useRef([]); 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {loading, error} = useSelector((state) => state.auth)
+  const { loading, error } = useSelector((state) => state.auth)
 
   const handleform = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   }
+
+  const handleOtpChange = (e, index) => {
+    const value = e.target.value.replace(/\D/, "");
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+  
+    if (value && index < 4) {
+      otpRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleOtpBackspace = (e, index) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      otpRefs.current[index - 1].focus();
+    }
+  };
 
   // Register API 
   const signup = async (data) => {
@@ -40,11 +58,13 @@ const Login = () => {
   // OTP verify API
   const OtpVerify = async (data) => {
     try {
-      const response = await PostApi("auth/verify-otp", { otp: data })
+      const fullOtp = data.join("");
+
+      const response = await PostApi("auth/verify-otp", { otp: fullOtp })
         .then((response) => {
           toast.success(response.message);
-          setIsOtpActive(false)
-          setIsRightPanelActive(false)
+          dispatch(loginSuccess({ user: response.user }));
+          navigate("/");
         })
     } catch (e) {
       if (e.response) {
@@ -59,19 +79,15 @@ const Login = () => {
   // Login API
   const loginUser = (email, password) => async (dispatch) => {
     dispatch(loginStart());
-  
+
     try {
       const response = await PostApi('auth/login', { email, password });
-  
+      console.log(response);
+
       if (response && response.success) {
-        dispatch(
-          loginSuccess({
-            user: response.user,
-            token: response.token, 
-          })
-        );
+        dispatch(loginSuccess({ user: response.user }));
         toast.success("Login successfully!");
-        navigate("/"); 
+        navigate("/");
       } else {
         dispatch(loginFailure(response.message || "Login failed"));
         toast.error(response.message || "Login failed");
@@ -83,15 +99,15 @@ const Login = () => {
       toast.error(errorMessage);
     }
   };
-  
-  
 
-  
-  const handleLogin = (e) => {    
+
+
+
+  const handleLogin = (e) => {
     e.preventDefault();
     dispatch(loginUser(form.email, form.password)); // Call loginUser action with form data
   }
-  
+
 
   const handleOtpSubmit = () => {
     OtpVerify(otp);
@@ -217,19 +233,31 @@ const Login = () => {
           className={`absolute bottom-0 left-0 w-full h-full flex flex-col items-center justify-center p-10 bg-transparent transition-transform duration-700 ${isOtpActive ? "translate-y-0" : "-translate-y-100"
             }`}
         >
-          <h1 className="text-2xl font-bold">Otp</h1>
-          <span className="text-sm">Enter Your Otp</span>
-          <input
-            onChange={(e) => setOtp(e.target.value)}
-            type="text"
-            placeholder="Enter Otp"
-            className="w-[80%] p-3 my-2 bg-gray-200 rounded"
-          />
-          <button className="bg-cyan-600 hover:bg-cyan-700 text-white shadow-[0_0.7em_0.8em_-0.5em_rgb(0,0,0)] px-8 py-3 mt-4 rounded-full"
+          <h1 className="text-2xl font-bold">OTP</h1>
+          <span className="text-sm mb-4">Enter your OTP</span>
+
+          <div className="flex gap-2">
+            {[0, 1, 2, 3, 4].map((_, index) => (
+              <input
+                key={index}
+                ref={(el) => (otpRefs.current[index] = el)}
+                type="text"
+                maxLength="1"
+                className="w-12 h-12 text-center text-xl border border-gray-300 rounded bg-white focus:outline-none focus:ring-2 focus:ring-cyan-600"
+                onChange={(e) => handleOtpChange(e, index)}
+                onKeyDown={(e) => handleOtpBackspace(e, index)}
+                value={otp[index] || ""}
+              />
+            ))}
+          </div>
+
+          <button
+            className="bg-cyan-600 hover:bg-cyan-700 text-white shadow-[0_0.7em_0.8em_-0.5em_rgb(0,0,0)] px-8 py-3 mt-6 rounded-full"
             onClick={handleOtpSubmit}
           >
             Submit
           </button>
+
           <a
             href="#"
             className="text-cyan-300 text-sm mt-4"
@@ -238,6 +266,7 @@ const Login = () => {
             Back to Sign Up
           </a>
         </div>
+
 
         {/* Overlay */}
         {!isForgotPasswordActive && !isOtpActive && (

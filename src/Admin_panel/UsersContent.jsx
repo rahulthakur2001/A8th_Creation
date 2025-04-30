@@ -1,129 +1,194 @@
-import React, { useState } from "react";
-import { BiSearch, BiTrash } from "react-icons/bi";
+import React, { useEffect, useState } from "react";
+import Getapi from "../APIs/Getapi";
+import Putapi from "../APIs/Putapi";
+import { toast } from "react-toastify";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
-export const UsersContent = () => {
-  const [users, setUsers] = useState(
-    Array.from({ length: 50 }, (_, i) => ({
-      id: i + 1,
-      name: `User ${i + 1}`,
-      email: `user${i + 1}@example.com`,
-      date: new Date(2025, 3, 1 + i).toISOString(),
-    }))
+const UsersContent = () => {
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+
+  const usersPerPage = 5;
+
+  const fetchUsers = async () => {
+    try {
+      const res = await Getapi("user/all");
+      setUsers(res?.data || []);
+    } catch (err) {
+      toast.error("Failed to fetch users");
+    }
+  };
+
+  const handleUserAction = async (userId, status) => {
+    try {
+      const res = await Putapi(`user/update-status/${userId}`, { status });
+      toast.success(res?.message || "User status updated!");
+      fetchUsers();
+    } catch (err) {
+      toast.error("Failed to update user status");
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(search.toLowerCase()) ||
+    user.email.toLowerCase().includes(search.toLowerCase())
   );
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 15;
+  const indexOfLastOrder = currentPage * usersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - usersPerPage;
+  const totalUserPages = Math.ceil(filteredUsers.length / usersPerPage);
+  const currentUsers = filteredUsers.slice(indexOfFirstOrder, indexOfLastOrder);
 
-  // Pagination Logic
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(users.length / usersPerPage);
+  const renderPagination = () => {
+    if (totalUserPages <= 1) return null;
 
-  const handleDelete = (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this user?"
+    const renderPageButton = (pageNumber) => (
+      <button
+        key={pageNumber}
+        onClick={() => setCurrentPage(pageNumber)}
+        className={`relative ${currentPage === pageNumber
+          ? "z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white"
+          : "inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-700 hover:bg-gray-700"
+          } focus:z-20`}
+      >
+        {pageNumber}
+      </button>
     );
-    if (confirmDelete) {
-      setUsers((prev) => prev.filter((user) => user.id !== id));
+
+    const renderEllipsis = (key) => (
+      <span
+        key={key}
+        className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 ring-1 ring-gray-700"
+      >
+        ...
+      </span>
+    );
+
+    const buttons = [];
+
+    buttons.push(renderPageButton(1));
+
+    if (currentPage > 3) {
+      buttons.push(renderEllipsis("start-ellipsis"));
     }
-  };
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalUserPages - 1, currentPage + 1); i++) {
+      buttons.push(renderPageButton(i));
     }
-  };
 
-  return (
-    <div className="text-white bg-[#0b1739] p-6 rounded-xl">
-      <div className="text-2xl font-bold mb-5">User Data</div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="text-gray-400 text-center">
-              <th className="p-3">S.No</th>
-              <th className="p-3">Name</th>
-              <th className="p-3">Email</th>
-              <th className="p-3">Date</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-            {currentUsers.map((user, index) => (
-              <tr
-                key={user.id}
-                className="border-t border-gray-700 hover:bg-gray-800/50 transition-colors"
-              >
-                <td className="p-3">#{indexOfFirstUser + index + 1}</td>
-                <td className="p-3">{user.name}</td>
-                <td className="p-3">{user.email}</td>
-                <td className="p-3">
-                  {new Date(user.date).toLocaleDateString()}
-                </td>
-                <td className="p-3">
-                  <button
-                    onClick={() => handleDelete(user.id)}
-                    className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg text-sm cursor-pointer"
-                  >
-                    <BiTrash className="mx-auto"/>
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    if (currentPage < totalUserPages - 2) {
+      buttons.push(renderEllipsis("end-ellipsis"));
+    }
 
-        {currentUsers.length === 0 && (
-          <div className="text-center text-gray-400 py-10">No users found.</div>
-        )}
+    if (totalUserPages > 1) {
+      buttons.push(renderPageButton(totalUserPages));
+    }
 
-        {/* Pagination Button */}
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="mt-6 flex justify-center items-center gap-2 text-white">
+    return (
+      <div className="flex justify-between items-center mt-6 text-white">
+        <div className="text-sm">
+          Showing <span className="font-medium">{indexOfFirstOrder + 1}</span> to{" "}
+          <span className="font-medium">
+            {Math.min(indexOfLastOrder, filteredUsers.length)}
+          </span>{" "}
+          of <span className="font-medium">{filteredUsers.length}</span> results
+        </div>
+
+        <div>
+          <nav className="isolate inline-flex -space-x-px rounded-md">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className={`px-3 py-1 rounded ${
-                currentPage === 1
-                  ? "bg-gray-600 cursor-not-allowed"
-                  : "bg-gray-800 hover:bg-gray-700"
-              }`}
+              className={`relative inline-flex items-center rounded-l-md px-2 py-2 ${currentPage === 1
+                ? "text-gray-600 cursor-not-allowed"
+                : "text-gray-400 hover:bg-gray-700"
+                } ring-1 ring-gray-700 focus:z-20`}
             >
-              Prev
+              <span className="sr-only">Previous</span>
+              <BiChevronLeft className="h-5 w-5" />
             </button>
 
-            {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentPage(index + 1)}
-                className={`px-3 py-1 rounded ${
-                  currentPage === index + 1
-                    ? "bg-white text-black font-bold"
-                    : "bg-gray-800 hover:bg-gray-700"
-                }`}
-              >
-                {index + 1}
-              </button>
-            ))}
+            {buttons}
 
             <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className={`px-3 py-1 rounded ${
-                currentPage === totalPages
-                  ? "bg-gray-600 cursor-not-allowed"
-                  : "bg-gray-800 hover:bg-gray-700"
-              }`}
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalUserPages))}
+              disabled={currentPage === totalUserPages}
+              className={`relative inline-flex items-center rounded-r-md px-2 py-2 ${currentPage === totalUserPages
+                ? "text-gray-600 cursor-not-allowed"
+                : "text-gray-400 hover:bg-gray-700"
+                } ring-1 ring-gray-700 focus:z-20`}
             >
-              Next
+              <span className="sr-only">Next</span>
+              <BiChevronRight className="h-5 w-5" />
             </button>
-          </div>
-        )}
+          </nav>
+        </div>
       </div>
+    );
+  };
+
+  return (
+    <div className="bg-[#0b1739] text-white p-6 rounded-xl w-full">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold">User Management</h2>
+        <input
+          type="text"
+          placeholder="Search by name or email..."
+          className="bg-gray-800 px-3 py-2 rounded-md text-white outline-none w-72"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setCurrentPage(1);
+          }}
+        />
+      </div>
+
+      {filteredUsers.length === 0 ? (
+        <p className="text-center text-gray-400">No users found.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="text-gray-400 text-center">
+                <th className="p-3">S.No</th>
+                <th className="p-3">Name</th>
+                <th className="p-3">Email</th>
+                <th className="p-3">Date</th>
+                <th className="p-3">Action</th>
+              </tr>
+            </thead>
+            <tbody className="text-center">
+              {currentUsers.map((user, idx) => (
+                <tr key={user._id} className="border-t border-gray-700 hover:bg-gray-800 transition-colors">
+                  <td className="p-3">#{indexOfFirstOrder + idx + 1}</td>
+                  <td className="p-3">{user.name}</td>
+                  <td className="p-3">{user.email}</td>
+                  <td className="p-3">{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <td className="p-3">
+                    <button
+                      className="bg-red-600 hover:bg-red-700 py-1 px-3 rounded-lg text-xs"
+                      onClick={() => handleUserAction(user._id, "deactivate")}
+                    >
+                      Deactivate
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {filteredUsers.length > 0 && (
+            <div className="mt-6">{renderPagination()}</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
+
+export default UsersContent;

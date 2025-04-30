@@ -5,15 +5,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../index.css";
 import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from "js-cookie";
 import { logout } from "../../Slices/authSlice";
-import axios from "axios";
 import Getapi from "../../APIs/Getapi";
 import { toast } from "react-toastify";
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const user = useSelector((state) => state.auth.user);
+  const isAdmin = user?.role?.includes("Admin");
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,11 +26,11 @@ export default function Header() {
   const handleLogout = async () => {
     try {
       const response = await Getapi('auth/logout');
-  
+
       if (response) {
         toast.success("Logged out successfully!");
       }
-  
+
       dispatch(logout());
       navigate("/login");
     } catch (error) {
@@ -37,11 +38,7 @@ export default function Header() {
       console.error(error);
     }
   };
-  
 
-  const token = useSelector((state) => state.auth.token) || Cookies.get("token");
-
-  const user = useSelector((state) => state.auth.user);
 
   // const displayName = userName ? userName.substring(0, 2).toUpperCase() : "";
 
@@ -97,7 +94,6 @@ export default function Header() {
             </Link>
           </div>
         </div>
-
         <div className="relative flex items-center gap-4">
           {!user ? (
             <Link
@@ -115,10 +111,20 @@ export default function Header() {
               <span className="text-lg">{user.name}</span>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg text-black z-10">
-                  <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
+                <div className="absolute right-0 mt-0 w-40 bg-white rounded shadow-lg text-black z-10">
+                  <Link to="/user/profile" className="block px-4 py-2 hover:bg-gray-100">
                     Profile
                   </Link>
+
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Admin
+                    </Link>
+                  )}
+
                   <button
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -155,9 +161,8 @@ export default function Header() {
             </Link>
             <Link
               to="/exploreAll"
-              className={`text-lg font-semibold ${
-                isActive("/exploreAll") ? "text-teal-900" : ""
-              }`}
+              className={`text-lg font-semibold ${isActive("/exploreAll") ? "text-teal-900" : ""
+                }`}
             >
               Explore All
             </Link>
