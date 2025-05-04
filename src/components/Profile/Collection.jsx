@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import Getapi from '../../APIs/Getapi';
 
-const Collections = () => {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchSavedImages = async () => {
-      try {
-        const res = await Getapi('image/userSaved')
-        setImages(res.data.saved || []);
-      } catch (err) {
-        console.error('Error fetching images:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSavedImages();
-  }, []);
-
+const Collection = () => {
+      const [images, setImages] = useState([]);
+      const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+        const fetchSavedImages = async () => {
+          try {
+            const res = await Getapi('image/userSaved')
+            setImages(res.data.saved || []);
+          } catch (err) {
+            console.error('Error fetching images:', err);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchSavedImages();
+      }, []);
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div>
+         <div className="p-6 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Your Saved Images</h1>
 
       {loading ? (
@@ -49,7 +48,8 @@ const Collections = () => {
         </div>
       )}
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default Collections;
+export default Collection
