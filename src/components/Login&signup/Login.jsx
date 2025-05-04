@@ -105,7 +105,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(loginUser(form.email, form.password)); // Call loginUser action with form data
+    dispatch(loginUser(form.email, form.password)); 
   }
 
 

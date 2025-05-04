@@ -11,6 +11,7 @@ import { PageNotfound } from "./components/PageNotFound/PageNotfound";
 import Profile from "./components/Profile/Profile";
 import Subscription from "./components/Profile/Subscription";
 import Collections from "./components/Profile/collections";
+import Download from "./components/Profile/Download";
 const Dashboard = React.lazy(() => import("./components/Dashboard/Dashboard"));
 const ContactUs = React.lazy(() => import("./components/ContactUs/ContactUs"));
 const AboutUs = React.lazy(() => import("./components/AboutUs/AboutUs"));
@@ -61,6 +62,7 @@ function App() {
             <Route path="profile" element={<Profile/>} />
             <Route path="subscription" element={<Subscription/>} />
             <Route path="collections" element={<Collections/>} />
+            <Route path="downloads" element={<Download/>} />
           </Route>
         </Routes>
       </Suspense>

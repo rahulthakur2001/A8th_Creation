@@ -23,7 +23,7 @@ const Admin_Upload = () => {
         }
 
         const formData = new FormData();
-        files.forEach((file) => formData.append("images", file));
+        files.forEach((file) => formData.append("image", file));
         formData.append("title", title);
         formData.append("description", description);
         formData.append("category", category);

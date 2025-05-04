@@ -4,8 +4,9 @@ import { FaDownload, FaHeart, FaRegHeart, FaSearch } from "react-icons/fa";
 import { BiSolidImageAdd } from "react-icons/bi";
 import PostApiFile from "../../APIs/PostApiFile";
 import Getapi from "../../APIs/Getapi";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import PostApi from "../../APIs/Postapi";
 
 const ExploreAll = () => {
   const [loading, setLoading] = useState(false);
@@ -16,19 +17,37 @@ const ExploreAll = () => {
   const [title, setTitle] = useState("");
   const [uploader, setUploader] = useState("");
   const [images, setImages] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [collection, setCollection] = useState([]);
   const navigate = useNavigate();
 
   const handleUploadClick = () => {
-    const isAuthenticated = localStorage.getItem('token'); // or any auth logic
+    const isAuthenticated = localStorage.getItem("token");
     if (isAuthenticated) {
       setIsOpen(true);
     } else {
-      navigate('/login');
+      navigate("/login");
     }
   };
 
+  const fetchSavedImages = async () => {
+    try {
+      const res = await Getapi("image/userSaved");
+      setCollection(res.data.saved || []);
+    } catch (err) {
+      console.error("Error fetching saved images:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (activetab === "Collection") {
+      fetchSavedImages();
+    }
+  }, [activetab]);
+
   const handleUploadImage = async () => {
-    setLoading(true); // start loading
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("title", title);
@@ -45,35 +64,39 @@ const ExploreAll = () => {
         setCategory("");
         setUploader("");
         setIsOpen(false);
-        getAllImages();
+        setPage(1);
+        setImages([]);
+        getAllImages(1);
       }
     } catch (error) {
       console.error(error);
-      const errorMsg =
-        error?.response?.data?.message ||
-        "Upload failed. Please check your input or try again.";
-      toast.error(errorMsg);
+      toast.error("Upload failed. Please try again.");
     } finally {
-      setLoading(false); // stop loading
+      setLoading(false);
     }
   };
 
-
-  const getAllImages = async () => {
+  const getAllImages = async (currentPage = 1) => {
     try {
-      const response = await Getapi("image/all");
-      if (response?.data?.images) {
-        setImages(response.data.images);
+      const response = await Getapi(`image/all?page=${currentPage}&limit=18`);
+      const newImages = response?.data?.images || [];
+
+      if (newImages.length > 0) {
+        setImages((prev) => [...prev, ...newImages]);
+        setHasMore(newImages.length === 18);
+      } else {
+        setHasMore(false);
       }
     } catch (error) {
       console.error(error);
       toast.error("Failed to fetch images.");
+      setHasMore(false);
     }
   };
 
   useEffect(() => {
-    getAllImages();
-  }, []);
+    getAllImages(page);
+  }, [page]);
 
   return (
     <section className="p-6">
@@ -92,25 +115,29 @@ const ExploreAll = () => {
       </div>
 
       {/* Categories */}
-      <div className="flex items-center justify-between mt-4">
-        <div className="flex gap-4">
-          {["Filters", "Photos", "PSD", "Vectors", "All Images"].map((category, index) => (
+      <div className="flex items-center justify-between mt-4 flex-wrap gap-4">
+        {/* Categories Buttons */}
+        <div className="flex gap-4 flex-wrap justify-center md:justify-start">
+          {["Filters", "Photos", "PSD", "Vectors", "All Images"].map((cat, index) => (
             <button
               key={index}
-              className="bg-gray-200 px-4 py-2 rounded text-gray-700 hover:bg-gray-300"
+              className="bg-gray-200 px-4 py-2 rounded text-gray-700 hover:bg-gray-300 mb-2 md:mb-0"
             >
-              {category}
+              {cat}
             </button>
           ))}
         </div>
+
+        {/* Upload Button */}
         <button
           onClick={handleUploadClick}
-          className="bg-cyan-700 px-4 py-2 rounded text-white hover:bg-cyan-900 flex items-center gap-1.5"
+          className="bg-cyan-700 px-4 py-2 rounded text-white hover:bg-cyan-900 flex items-center gap-1.5 ml-auto"
         >
           <BiSolidImageAdd size={20} />
           Upload
         </button>
       </div>
+
 
       {/* Upload Modal */}
       {isOpen && (
@@ -119,9 +146,7 @@ const ExploreAll = () => {
             {/* Upload Box */}
             <div className="flex flex-col items-center justify-center w-[55%] bg-gray-50 rounded-lg shadow p-4">
               <h2 className="text-2xl font-semibold mb-1">Upload your files</h2>
-              <p className="text-xs text-gray-500 mb-6">
-                File should be .png, .jpg, .jpeg
-              </p>
+              <p className="text-xs text-gray-500 mb-6">File should be .png, .jpg, .jpeg</p>
               <form className="relative w-full h-40 bg-gray-200 rounded-lg shadow-inner">
                 <input
                   type="file"
@@ -146,7 +171,7 @@ const ExploreAll = () => {
               </form>
             </div>
 
-            {/* Right Side Inputs */}
+            {/* Input Form */}
             <div className="flex-1 flex flex-col gap-4">
               <input
                 type="text"
@@ -176,42 +201,13 @@ const ExploreAll = () => {
               />
               <button
                 onClick={handleUploadImage}
-                className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900 flex items-center justify-center"
+                className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900"
                 disabled={loading}
               >
-                {loading ? (
-                  <span className="flex items-center gap-2">
-                    <svg
-                      className="animate-spin h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v8z"
-                      ></path>
-                    </svg>
-                    Uploading...
-                  </span>
-                ) : (
-                  "Upload"
-                )}
+                {loading ? "Uploading..." : "Upload"}
               </button>
-
             </div>
           </div>
-
-          {/* Close Button */}
           <button
             onClick={() => setIsOpen(false)}
             className="absolute top-4 right-6 text-white text-2xl"
@@ -222,7 +218,7 @@ const ExploreAll = () => {
       )}
 
       {/* Tabs */}
-      <div className="flex items-center space-x-4 text-[16px] my-5">
+      <div className="flex items-center space-x-4 text-[16px] my-5 sticky top-20 z-40 bg-white pb-4 w-full max-w-8xl">
         <div
           className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${activetab === "Images"
             ? "border-black bg-gradient-to-b from-slate-50 to-slate-200 rounded-t-lg"
@@ -245,28 +241,73 @@ const ExploreAll = () => {
         </div>
       </div>
 
-      {/* Image Gallery */}
+      {/* Gallery */}
       {activetab === "Images" && (
-        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
-          {images.map((image) => (
-            <div key={image._id} className="break-inside-avoid overflow-hidden rounded-lg">
-              <ImageCard image={image} />
+        <>
+          <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
+            {images.map((image) => (
+              <div key={image._id} className="break-inside-avoid overflow-hidden rounded-lg">
+                <ImageCard image={image} isCollection={false} savedIds={collection.map(c => c._id)} />
+              </div>
+            ))}
+          </div>
+          {hasMore && (
+            <div className="flex justify-center mt-10">
+              <button
+                onClick={() => setPage((prev) => prev + 1)}
+                className="bg-teal-700 hover:bg-teal-900 text-white px-6 py-2 rounded shadow"
+              >
+                Load More
+              </button>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
 
       {activetab === "Collection" && (
-        <div className="grid grid-cols-1 md:grid-cols-3 h-80 gap-6 mt-4">
-          <h1 className="text-center">No collections yet.</h1>
-        </div>
+        Array.isArray(collection) && collection.length > 0 ? (
+          <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
+            {collection.map((image) => (
+              <div key={image._id} className="break-inside-avoid overflow-hidden rounded-lg">
+                <ImageCard image={image} isCollection={true} savedIds={[]} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 h-80 gap-6 mt-4">
+            <h1 className="text-center">No collections yet.</h1>
+          </div>
+        )
       )}
+
+      <ToastContainer />
     </section>
   );
 };
 
-const ImageCard = ({ image }) => {
+const ImageCard = ({ image, isCollection, savedIds }) => {
   const [hovered, setHovered] = useState(false);
+  const isSaved = savedIds.includes(image._id);
+
+  const handleSaveImage = async (imageId) => {
+    try {
+      const response = await PostApi(`image/savedImage/${imageId}`);
+      toast.success(response.message);
+    } catch (error) {
+      console.error("Failed to save image", error);
+    }
+  };
+
+  const handleDownloadImage = async (imageId) => {
+    try {
+      const response = await PostApi(`image/downloadImage/${imageId}`);
+      toast.success(response.message, {
+        autoClose: 1000,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div
@@ -287,12 +328,19 @@ const ImageCard = ({ image }) => {
             {image.premium ? "Premium" : "Free"}
           </span>
           <div className="absolute top-5 right-4 flex flex-col gap-3 text-black">
-            <button className="bg-white p-3 rounded shadow hover:text-blue-600">
+            <button
+              onClick={() => handleDownloadImage(image?._id)}
+              className="bg-white p-3 rounded shadow hover:text-blue-600">
               <FaDownload />
             </button>
-            <button className="bg-white p-3 rounded shadow hover:text-red-500">
-              <FaHeart />
-            </button>
+            {!isCollection && (
+              <button
+                onClick={() => handleSaveImage(image?._id)}
+                className={`bg-white p-3 rounded shadow ${isSaved ? "text-red-500" : "hover:text-red-500"}`}
+              >
+                {isSaved ? <FaHeart /> : <FaRegHeart />}
+              </button>
+            )}
           </div>
           <div className="absolute bottom-0 px-3 py-3 w-full bg-black/40 text-sm text-left">
             <p className="text-lg font-bold">{image.title}</p>
