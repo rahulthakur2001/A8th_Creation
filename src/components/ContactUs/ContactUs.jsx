@@ -32,11 +32,11 @@ const ContactUs = () => {
   return (
     <div>
       <div className="w-full min-h-screen p-10">
-        <div className="max-w-6xl mx-auto flex justify-between gap-15">
+        <div className="max-w-6xl mx-auto flex justify-between md:flex-row flex-col gap-15">
           {/* Left Section */}
-          <div className="w-[60%] pt-20">
-            <h1 className="text-5xl font-semibold mb-5">Contact Us</h1>
-            <p className="text-gray-600 mb-4 w-100">
+          <div className="w-[60%] md:pt-20 pt-2">
+            <h1 className="text-4xl md:text-5xl font-semibold text-nowrap mb-5">Contact Us</h1>
+            <p className="text-gray-600 mb-4 md:w-100 w-80">
               Email, call, or complete the form to learn how A8th creation can
               solve your messaging problem.
             </p>
@@ -48,7 +48,7 @@ const ContactUs = () => {
             </a>
 
             {/* Additional Information */}
-            <div className="mt-10 flex space-x-2">
+            <div className="mt-10 flex md:flex-row flex-col space-x-2">
               <div>
                 <h3 className="text-[17px] font-semibold">Customer Support</h3>
                 <p className="text-gray-600 text-[14px] mb-6">
@@ -84,7 +84,7 @@ const ContactUs = () => {
           </div>
 
           {/* Right Section - Contact Form */}
-          <div className="bg-white p-8 rounded-3xl shadow-lg w-[40%]">
+          <div className="bg-white p-8 rounded-3xl shadow-lg md:w-[40%]">
             <h2 className="text-3xl font-bold mb-1">Get in Touch</h2>
             <p className="text-gray-600 font-semibold mb-6">
               You can reach us anytime
@@ -158,7 +158,7 @@ const ContactUs = () => {
         </div>
       </div>
 
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-8">
         <div className="grid md:grid-cols-2 gap-10 max-w-6xl w-full">
           {/* Left Section - Map (Embed using iframe) */}
           <div className="relative">
@@ -170,7 +170,7 @@ const ContactUs = () => {
             ></iframe>
 
             {/* Map Card */}
-            <div className="absolute bottom-14 left-14 bg-white shadow-lg p-4 rounded-lg w-74">
+            <div className="absolute bottom-14 md:left-14 left-10 bg-white shadow-lg p-4 rounded-lg w-74">
               <div className="flex items-center">
                 <div className="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center">
                   A
@@ -219,7 +219,7 @@ const ContactUs = () => {
         </div>
       </div>
 
-      <div className="mx-auto">
+      <div className="mx-auto p-1">
         <div className="text-center">
           <h2 className="text-2xl mb-4">FAQ</h2>
           <p className="font-semibold text-3xl">
@@ -229,8 +229,8 @@ const ContactUs = () => {
             If there are any question you want to ask. We will answer all your
             question.
           </span>
-          <div className="flex gap-2 px-100 mt-4 relative">
-            <span className="absolute left-3 pl-100 top-3">📧</span>
+          <div className="flex gap-2 md:px-100 mt-4 relative">
+            <span className="absolute left-3 md:pl-100 top-3">📧</span>
             <input
               type="email"
               placeholder="Your email"
@@ -254,7 +254,7 @@ const ContactUs = () => {
 
         {/* Text and Buttons */}
         <div className="text-center text-white z-1">
-          <h1 className="text-5xl w-200 leading-tight font-semibold mb-6">
+          <h1 className="text-3xl md:text-5xl md:w-200 leading-tight font-semibold mb-6">
             Ready to experience the speed and simplicity of A8th Creation?
           </h1>
 

@@ -7,6 +7,7 @@ import Getapi from "../../APIs/Getapi";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import PostApi from "../../APIs/Postapi";
+import { FiFilter } from "react-icons/fi";
 
 const ExploreAll = () => {
   const [loading, setLoading] = useState(false);
@@ -98,6 +99,20 @@ const ExploreAll = () => {
     getAllImages(page);
   }, [page]);
 
+  const categories = ["Photos", "PSD", "Vectors", "All Images"];
+  const [activeFilters, setActiveFilters] = useState([]);
+
+  const toggleFilter = (cat) => {
+    setActiveFilters((prev) =>
+      prev.includes(cat) ? prev.filter((f) => f !== cat) : [...prev, cat]
+    );
+  };
+
+  const orderedCategories = [
+    ...activeFilters,
+    ...categories.filter((cat) => !activeFilters.includes(cat)),
+  ];
+
   return (
     <section className="p-6">
       {/* Search Bar */}
@@ -108,36 +123,62 @@ const ExploreAll = () => {
           placeholder="Search all assets"
           className="border border-gray-400 bg-gray-200 px-10 py-3 w-full rounded-md"
         />
-        <button className="flex items-center gap-2 absolute right-2 bg-teal-700 text-white px-4 py-2 rounded">
+        <button className="flex items-center gap-2 absolute right-2 bg-teal-700 text-white px-4 py-1.5 rounded">
           <FaSearch size={14} />
           Search
         </button>
       </div>
 
       {/* Categories */}
-      <div className="flex items-center justify-between mt-4 flex-wrap gap-4">
-        {/* Categories Buttons */}
-        <div className="flex gap-4 flex-wrap justify-center md:justify-start">
-          {["Filters", "Photos", "PSD", "Vectors", "All Images"].map((cat, index) => (
-            <button
-              key={index}
-              className="bg-gray-200 px-4 py-2 rounded text-gray-700 hover:bg-gray-300 mb-2 md:mb-0"
-            >
-              {cat}
-            </button>
-          ))}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-4 gap-4">
+        {/* Filters Section */}
+        <div className="flex flex-col md:flex-row flex-wrap md:flex-nowrap w-full">
+          {/* Filters Label */}
+          <div className="flex items-center gap-2 px-5 py-4 rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none text-lg font-bold text-gray-700 bg-gray-300 w-full md:w-auto justify-between md:justify-start">
+            Filters <FiFilter />
+          </div>
+
+          {/* Category Buttons */}
+          <div className="flex gap-2 flex-wrap justify-center md:justify-start bg-gray-200 w-full md:w-auto rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none px-4 py-2">
+            {orderedCategories.map((cat) => {
+              const isActive = activeFilters.includes(cat);
+              return (
+                <button
+                  key={cat}
+                  onClick={() => toggleFilter(cat)}
+                  className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-300 ${
+                    isActive ? "bg-gray-300 font-semibold" : "bg-gray-200"
+                  }`}
+                >
+                  {cat}
+                  {isActive && (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFilter(cat);
+                      }}
+                      className="text-red-500 cursor-pointer text-sm"
+                    >
+                      ✕
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Upload Button */}
-        <button
-          onClick={handleUploadClick}
-          className="bg-cyan-700 px-4 py-2 rounded text-white hover:bg-cyan-900 flex items-center gap-1.5 ml-auto"
-        >
-          <BiSolidImageAdd size={20} />
-          Upload
-        </button>
+        <div className="w-full md:w-auto flex justify-center md:justify-end">
+          <button
+            onClick={handleUploadClick}
+            className="bg-cyan-700 px-4 py-2 rounded text-white hover:bg-cyan-900 flex items-center gap-1.5 w-full md:w-auto justify-center"
+          >
+            <BiSolidImageAdd size={20} />
+            Upload
+          </button>
+        </div>
       </div>
-
 
       {/* Upload Modal */}
       {isOpen && (
@@ -146,7 +187,9 @@ const ExploreAll = () => {
             {/* Upload Box */}
             <div className="flex flex-col items-center justify-center w-[55%] bg-gray-50 rounded-lg shadow p-4">
               <h2 className="text-2xl font-semibold mb-1">Upload your files</h2>
-              <p className="text-xs text-gray-500 mb-6">File should be .png, .jpg, .jpeg</p>
+              <p className="text-xs text-gray-500 mb-6">
+                File should be .png, .jpg, .jpeg
+              </p>
               <form className="relative w-full h-40 bg-gray-200 rounded-lg shadow-inner">
                 <input
                   type="file"
@@ -159,7 +202,9 @@ const ExploreAll = () => {
                   htmlFor="file-upload"
                   className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer"
                 >
-                  <p className="z-10 text-xs font-light text-gray-500">Drag & Drop</p>
+                  <p className="z-10 text-xs font-light text-gray-500">
+                    Drag & Drop
+                  </p>
                   <svg
                     className="z-10 w-8 h-8 text-indigo-400"
                     fill="currentColor"
@@ -218,22 +263,24 @@ const ExploreAll = () => {
       )}
 
       {/* Tabs */}
-      <div className="flex items-center space-x-4 text-[16px] my-5 sticky top-20 z-40 bg-white pb-4 w-full max-w-8xl">
+      <div className="flex items-center space-x-4 text-[16px] my-5 top-20 z-40 bg-white pb-4 w-full max-w-8xl">
         <div
-          className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${activetab === "Images"
-            ? "border-black bg-gradient-to-b from-slate-50 to-slate-200 rounded-t-lg"
-            : "text-gray-500 border-transparent hover:border-gray-400"
-            }`}
+          className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${
+            activetab === "Images"
+              ? "border-black bg-gradient-to-b from-slate-50 to-slate-200 rounded-t-lg"
+              : "text-gray-500 border-transparent hover:border-gray-400"
+          }`}
           onClick={() => setActivetab("Images")}
         >
           <IoMdImages />
           Images
         </div>
         <div
-          className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${activetab === "Collection"
-            ? "border-black bg-gradient-to-b from-slate-50 to-slate-200 rounded-t-lg"
-            : "text-gray-500 border-transparent hover:border-gray-400"
-            }`}
+          className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${
+            activetab === "Collection"
+              ? "border-black bg-gradient-to-b from-slate-50 to-slate-200 rounded-t-lg"
+              : "text-gray-500 border-transparent hover:border-gray-400"
+          }`}
           onClick={() => setActivetab("Collection")}
         >
           <FaRegHeart />
@@ -246,8 +293,15 @@ const ExploreAll = () => {
         <>
           <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
             {images.map((image) => (
-              <div key={image._id} className="break-inside-avoid overflow-hidden rounded-lg">
-                <ImageCard image={image} isCollection={false} savedIds={collection.map(c => c._id)} />
+              <div
+                key={image._id}
+                className="break-inside-avoid overflow-hidden rounded-lg"
+              >
+                <ImageCard
+                  image={image}
+                  isCollection={false}
+                  savedIds={collection.map((c) => c._id)}
+                />
               </div>
             ))}
           </div>
@@ -264,11 +318,14 @@ const ExploreAll = () => {
         </>
       )}
 
-      {activetab === "Collection" && (
-        Array.isArray(collection) && collection.length > 0 ? (
+      {activetab === "Collection" &&
+        (Array.isArray(collection) && collection.length > 0 ? (
           <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
             {collection.map((image) => (
-              <div key={image._id} className="break-inside-avoid overflow-hidden rounded-lg">
+              <div
+                key={image._id}
+                className="break-inside-avoid overflow-hidden rounded-lg"
+              >
                 <ImageCard image={image} isCollection={true} savedIds={[]} />
               </div>
             ))}
@@ -277,8 +334,7 @@ const ExploreAll = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 h-80 gap-6 mt-4">
             <h1 className="text-center">No collections yet.</h1>
           </div>
-        )
-      )}
+        ))}
 
       <ToastContainer />
     </section>
@@ -323,20 +379,25 @@ const ImageCard = ({ image, isCollection, savedIds }) => {
       {hovered && (
         <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white">
           <span
-            className={`absolute top-2 left-2 px-2 py-1 text-sm rounded ${image.premium ? "bg-yellow-500" : "bg-gray-600"}`}
+            className={`absolute top-2 left-2 px-2 py-1 text-sm rounded ${
+              image.premium ? "bg-yellow-500" : "bg-gray-600"
+            }`}
           >
             {image.premium ? "Premium" : "Free"}
           </span>
           <div className="absolute top-5 right-4 flex flex-col gap-3 text-black">
             <button
               onClick={() => handleDownloadImage(image?._id)}
-              className="bg-white p-3 rounded shadow hover:text-blue-600">
+              className="bg-white p-3 rounded shadow hover:text-blue-600"
+            >
               <FaDownload />
             </button>
             {!isCollection && (
               <button
                 onClick={() => handleSaveImage(image?._id)}
-                className={`bg-white p-3 rounded shadow ${isSaved ? "text-red-500" : "hover:text-red-500"}`}
+                className={`bg-white p-3 rounded shadow ${
+                  isSaved ? "text-red-500" : "hover:text-red-500"
+                }`}
               >
                 {isSaved ? <FaHeart /> : <FaRegHeart />}
               </button>
