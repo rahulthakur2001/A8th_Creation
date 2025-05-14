@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 export const Footer = () => {
   return (
@@ -15,28 +16,28 @@ export const Footer = () => {
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
-                  className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-lightBlue-400 shadow-lg p-2 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 cursor-pointer"
                   type="button"
                 >
-                  <i className="fab fa-twitter"></i>
+                  <FaFacebook size={25} color="blue" className="hover:scale-150"/>
                 </button>
                 <button
-                  className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-lightBlue-400 shadow-lg p-2 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 cursor-pointer"
                   type="button"
                 >
-                  <i className="fab fa-facebook-square"></i>
+                  <FaInstagram size={25} color="purple" className="hover:scale-140"/>
                 </button>
                 <button
-                  className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-lightBlue-400 shadow-lg p-2 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 cursor-pointer"
                   type="button"
                 >
-                  <i className="fab fa-dribbble"></i>
+                  <FaTwitter size={25} color="cyan" className="hover:scale-130"/>
                 </button>
                 <button
-                  className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-lightBlue-400 shadow-lg p-2 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 cursor-pointer"
                   type="button"
                 >
-                  <i className="fab fa-github"></i>
+                  <FaYoutube size={25} color="red" className="hover:scale-130"/>
                 </button>
               </div>
             </div>
@@ -47,10 +48,18 @@ export const Footer = () => {
                     Useful Links
                   </span>
                   <ul className="list-unstyled">
+                  <li>
+                      <a
+                        className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="/"
+                      >
+                        Home
+                      </a>
+                    </li>
                     <li>
                       <a
                         className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/presentation?ref=njs-profile"
+                        href="/about"
                       >
                         About Us
                       </a>
@@ -58,25 +67,17 @@ export const Footer = () => {
                     <li>
                       <a
                         className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://blog.creative-tim.com?ref=njs-profile"
+                        href="exploreAll"
                       >
-                        Blog
+                        Explore content
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.github.com/creativetimofficial?ref=njs-profile"
+                        href="/contact"
                       >
-                        Github
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile"
-                      >
-                        Free Products
+                        Contact Us
                       </a>
                     </li>
                   </ul>

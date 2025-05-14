@@ -9,7 +9,7 @@ const Faq = ({data}) => {
   };
 
   return (
-    <div className="px-15 py-6">
+    <div className="md:px-15 md:py-6 px-8 py-4">
       <div className="space-y-4">
         {data.map((faq, index) => (
           <div key={index} className="border-b border-gray-300 pb-2 w-full">

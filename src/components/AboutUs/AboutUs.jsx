@@ -170,10 +170,10 @@ const AboutUs = () => {
   return (
     <div>
       <div
-        className="flex h-screen overflow-hidden finisher-header"
+        className="flex md:h-screen overflow-hidden finisher-header"
         style={{ width: "99.9%" }}
       >
-        <div className="flex-1 md:p-15 p-5">
+        <div className="flex-1 md:p-15 p-5 h-max">
           <h1 className="text-4xl md:text-5xl font-semibold">
             A8th Creation – Where Imagination Meets Design
           </h1>
@@ -186,7 +186,7 @@ const AboutUs = () => {
           </p>
         </div>
 
-        <div className="flex-1 flex flex-col md:flex-row justify-between gap-1 md:p-0 p-5">
+        <div className="flex-1 flex flex-col md:flex-row justify-between gap-1 md:p-0 p-5 max-sm:hidden">
           <img
             src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
@@ -207,8 +207,8 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className="w-full flex items-center h-full md:flex-row flex-col md:p-10 gap-10 md:mt-0 mt-20">
-        <div className="flex-1 flex gap-0 md:p-0 p-5">
+      <div className="w-full flex items-center h-full md:flex-row flex-col md:p-10 gap-10 md:mt-0 mt-10">
+        <div className="flex-1 flex gap-0 md:p-0 p-5 w-full">
           <img
             src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
@@ -219,7 +219,7 @@ const AboutUs = () => {
           <h1 className="text-2xl md:text-4xl font-semibold">
           Your Ideas Express With Us
           </h1>
-          <p className="mt-5 md:mt-10 text-lg md:pr-20">
+          <p className="mt-5 md:mt-10 md:text-lg md:w-full w-90 md:pr-20 md:pb-0 pb-5">
             At A8th Creation, we believe that every idea has the potential to
             become something extraordinary. Whether it's a rough sketch or a
             fully-formed concept, we’re here to bring your vision to life
@@ -244,12 +244,12 @@ const AboutUs = () => {
               "url(https://static.vecteezy.com/system/resources/previews/001/339/185/non_2x/abstract-banner-with-modern-wireframe-landscape-design-free-vector.jpg)",
           }}
         >
-          <h1 className="text-white opacity-80 drop-shadow-md text-4xl italic font-bold">
+          <h1 className="text-white opacity-80 drop-shadow-md text-center text-2xl md:text-4xl italic font-bold">
             We’re A8th Creation — your creative design partner.
           </h1>
         </div>
 
-        <div className="p-20 space-y-8">
+        <div className="md:p-20 p-8 space-y-8">
           <p>
             At A8th Creation, we don’t just design—we communicate. Our mission
             is to bridge the gap between brands and their audiences through
@@ -314,7 +314,7 @@ const AboutUs = () => {
               {Array.isArray(cardData) &&
                 cardData.map((item, index) => (
                   <div>
-                    <div className="w-full md:h-30 h-60 mb-5 m-auto flex flex-col md:flex-row gap-2 md:rounded-bl-full rounded-tr-full md:bg-gray-600 bg-amber-300 shadow-lg p-5 px-10 border-2">
+                    <div className="w-full md:h-30 h-60 mb-5 m-auto flex flex-col md:flex-row gap-2 md:rounded-bl-full rounded-tr-full md:bg-gray-600 bg-amber-300 shadow-lg p-5 md:px-10 border-2">
                       <img
                         src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         alt="image"

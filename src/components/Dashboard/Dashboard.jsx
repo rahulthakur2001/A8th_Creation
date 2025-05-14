@@ -138,11 +138,11 @@ const TypewriterComponent = () => {
 
   return (
     <div>
-      <div className="absolute h-100 w-314">
+      <div className="absolute h-100 md:w-314 w-full">
         <img src={image} alt="" className="object-cover h-full w-full" />
       </div>
       <div className="relative flex flex-col justify-center items-center h-100 p-10 text-white text-center">
-        <h1 className="text-4xl md:text-3xl font-semibold">
+        <h1 className="text-xl md:text-3xl font-semibold">
           Discover Stunning Icons & Images –
           <Typewriter
             texts={[
@@ -155,7 +155,7 @@ const TypewriterComponent = () => {
             period={2000}
           />
         </h1>
-        <span className="mt-2">
+        <span className="mt-2 md:text-[16px] text-[12px]">
           10M+ free PNG and SVG icons, including the one you have in mind
         </span>
         <button onClick={handlenavigate} className="flex items-center gap-2 border-2 rounded-sm p-2 mt-7 bg-cyan-800 hover:bg-cyan-900 cursor-pointer">
@@ -163,8 +163,8 @@ const TypewriterComponent = () => {
         </button>
       </div>
 
-      <section className="px-15 py-6">
-        <div className="flex items-center justify-between">
+      <section className="md:px-15 md:py-6 px-8 py-4">
+        <div className="flex items-center justify-between md:flex-row flex-col">
           <div>
             <h2 className="text-2xl font-bold">
               Curated icon families for{" "}
@@ -176,7 +176,7 @@ const TypewriterComponent = () => {
             </p>
           </div>
           <div className="mt-6 text-right">
-            <button onClick={handlenavigate} className="px-4 py-2 border rounded-md text-blue-600 hover:bg-gray-100">
+            <button onClick={handlenavigate} className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white cursor-pointer">
               Discover more
             </button>
           </div>
@@ -209,7 +209,7 @@ const TypewriterComponent = () => {
       </section>
 
       <section className="bg-zinc-50 overflow-hidden">
-        <div className="max-w-screen-xl 2xl:max-w-screen-3xl px-8 md:px-12 mx-auto py-12 lg:py-24 space-y-24 h-svh flex flex-col justify-center">
+        <div className="max-w-screen-xl 2xl:max-w-screen-3xl px-8 md:px-12 mx-auto py-12 lg:py-24 space-y-24 md:h-svh flex flex-col justify-center">
           <div className="flex flex-col sm:flex-row mx-auto">
             <a href="#_">
               <img
@@ -242,7 +242,7 @@ const TypewriterComponent = () => {
             <a href="#_">
               <img
                 src="https://images.unsplash.com/photo-1522775417749-29284fb89f43?q=80&amp;w=2574&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                className="rounded-xl rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
                 alt="Creative workspace"
               />
             </a>
@@ -289,7 +289,7 @@ const TypewriterComponent = () => {
           ))}
         </div>
       </section>
-      <h2 className="text-2xl font-bold pt-10 pl-15">FAQ</h2>
+      <h2 className="text-2xl font-bold pt-10 md:pl-15 pl-8">FAQ</h2>
       <Faq data={faqs} />
     </div>
   );
