@@ -7,6 +7,11 @@ import { MdHighQuality, MdOtherHouses } from "react-icons/md";
 import { PiDownloadDuotone } from "react-icons/pi";
 import mahadev from "../../assets/MahadevWallper.jpg";
 import { useNavigate } from "react-router-dom";
+import first from "../../assets/1.png"
+import sec from "../../assets/2.png"
+import third from "../../assets/3.png"
+import fourth from "../../assets/4.png"
+import fifth from "../../assets/5.png"
 
 const Typewriter = ({ texts, period = 2000 }) => {
   const [text, setText] = useState("");
@@ -213,36 +218,36 @@ const TypewriterComponent = () => {
           <div className="flex flex-col sm:flex-row mx-auto">
             <a href="#_">
               <img
-                src="https://images.unsplash.com/photo-1530035415911-95194de4ebcc?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                src={first}
+                className="rounded-xl rotate-5 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
                 alt="Creative design image"
               />
             </a>
             <a href="#_">
               <img
-                src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?q=80&amp;w=2672&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                src={sec}
+                className="rounded-xl  -rotate-10 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
                 alt="Design workspace"
               />
             </a>
             <a href="#_">
               <img
-                src="https://images.unsplash.com/photo-1586996292898-71f4036c4e07?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                src={third}
+                className="rounded-xl  rotate-5 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
                 alt="Creative materials"
               />
             </a>
             <a href="#_">
               <img
-                src="https://images.unsplash.com/photo-1522775417749-29284fb89f43?q=80&amp;w=2574&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                src={fourth}
+                className="rounded-xl  -rotate-10 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
                 alt="Design inspiration"
               />
             </a>
             <a href="#_">
               <img
-                src="https://images.unsplash.com/photo-1522775417749-29284fb89f43?q=80&amp;w=2574&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                src={fifth}
+                className="rounded-xl rotate-5 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
                 alt="Creative workspace"
               />
             </a>
