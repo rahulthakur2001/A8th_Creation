@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BiBell, BiDownload } from "react-icons/bi";
+import { BiBell } from "react-icons/bi";
 import { FiMoreHorizontal } from "react-icons/fi";
 import Getapi from "../APIs/Getapi";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,59 +11,92 @@ import { BarChart, LineChart } from "@mui/x-charts";
 
 export const DashboardContent = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [dashboardStats, setDashboardStats] = useState({
+    totalUsers: 0,
+    totalImages: 0,
+    imageStatusCounts: [],
+  });
+  const [loading, setLoading] = useState(true);
   const profileRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
-  // Close profile menu when clicking outside
+  useEffect(() => {
+    const fetchDashboardStats = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("http://localhost:4000/image/dashboard/stats");
+        const data = await response.json();
+        if (data) {
+          setDashboardStats(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch dashboard stats:", error);
+        toast.error("Failed to load dashboard statistics");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardStats();
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setShowProfileMenu(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
+  const imageStatusData = ["accepted", "pending", "rejected"].map((status, index) => {
+    const found = dashboardStats.imageStatusCounts.find((s) => s._id === status);
+    return {
+      id: index,
+      value: found ? found.count : 0,
+      label: status.charAt(0).toUpperCase() + status.slice(1),
+    };
+  });
+
   const metrics = [
     {
       id: 1,
-      name: "Saved Products",
-      value: "50.8K",
-      icon: "❤️",
+      name: "Total Users",
+      value: dashboardStats?.totalUsers?.toString() || "0",
+      icon: "👥",
     },
     {
       id: 2,
-      name: "Stock Products",
-      value: "23.6K",
-      icon: "🛍️",
+      name: "Total Images",
+      value: dashboardStats?.totalImages?.toString() || "0",
+      icon: "🖼️",
     },
     {
       id: 3,
-      name: "Sale Products",
-      value: "756",
-      icon: "🛒",
+      name: "Accepted Images",
+      value: dashboardStats?.imageStatusCounts?.find((s) => s._id === "accepted")?.count?.toString() || "0",
+      icon: "✅",
     },
     {
       id: 4,
-      name: "Average Revenue",
-      value: "2.3K",
-      icon: "💰",
+      name: "Pending/Rejected",
+      value: (
+        (dashboardStats?.imageStatusCounts?.find((s) => s._id === "pending")?.count || 0) +
+        (dashboardStats?.imageStatusCounts?.find((s) => s._id === "rejected")?.count || 0)
+      ).toString(),
+      icon: "⏳",
     },
   ];
+
   const handleLogout = async () => {
     try {
-      const response = await Getapi("auth/logout");
-
-      if (response) {
-        toast.success("Logged out successfully!");
-      }
-
+      await Getapi("auth/logout");
+      toast.success("Logged out successfully!");
       dispatch(logout());
       navigate("/login");
     } catch (error) {
@@ -71,14 +104,8 @@ export const DashboardContent = () => {
       console.error(error);
     }
   };
-  const desktopOS = [
-    { id: 0, value: 60, label: "Windows" },
-    { id: 1, value: 20, label: "MacOS" },
-    { id: 2, value: 10, label: "Linux" },
-    { id: 3, value: 10, label: "Other" },
-  ];
 
-  const valueFormatter = (value) => `${value}%`;
+  const countFormatter = (value) => `${value}`;
 
   return (
     <div>
@@ -88,7 +115,7 @@ export const DashboardContent = () => {
         <div className="flex items-center space-x-4">
           <div className="relative">
             <BiBell className="w-6 h-6 text-gray-400" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-purple-500 rounded-full"></div>
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-purple-500 rounded-full" />
           </div>
           <div
             className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center cursor-pointer"
@@ -97,6 +124,7 @@ export const DashboardContent = () => {
             <span className="text-xs font-medium">{user.name.substring(0, 2).toUpperCase()}</span>
           </div>
         </div>
+
         {showProfileMenu && (
           <div
             ref={profileRef}
@@ -105,7 +133,7 @@ export const DashboardContent = () => {
             <div className="p-4 border-b border-gray-800">
               <div className="flex items-center">
                 <div className="h-10 w-10 bg-purple-500 rounded-full flex items-center justify-center">
-                  <span className="text-white">JC</span>
+                  <span className="text-white">{user.name.substring(0, 2).toUpperCase()}</span>
                 </div>
                 <div className="ml-3">
                   <div className="text-white">{user.name}</div>
@@ -114,25 +142,12 @@ export const DashboardContent = () => {
               </div>
             </div>
             <div className="py-1">
-              {["View Profile", "Account Settings", "Notifications"].map(
-                (item, index) => (
-                  <div
-                    key={index}
-                    className="px-4 py-2 text-white hover:bg-gray-800 cursor-pointer flex items-center"
-                  >
-                    {item === "View Profile" && (
-                      <span className="mr-2">👤</span>
-                    )}
-                    {item === "Account Settings" && (
-                      <span className="mr-2">⚙️</span>
-                    )}
-                    {item === "Notifications" && (
-                      <span className="mr-2">🔔</span>
-                    )}
-                    {item}
-                  </div>
-                )
-              )}
+              {["View Profile", "Account Settings", "Notifications"].map((item, index) => (
+                <div key={index} className="px-4 py-2 text-white hover:bg-gray-800 cursor-pointer flex items-center">
+                  <span className="mr-2">{item === "View Profile" ? "👤" : item === "Account Settings" ? "⚙️" : "🔔"}</span>
+                  {item}
+                </div>
+              ))}
             </div>
             <div className="border-t border-gray-800 py-1">
               <div
@@ -146,23 +161,19 @@ export const DashboardContent = () => {
           </div>
         )}
       </div>
-      {/* Metrics Grid */}
+
+      {/* Metrics */}
       <div className="grid grid-cols-2 gap-6 mb-8">
         {metrics.map((metric) => (
           <div key={metric.id} className="bg-[#0b1739] rounded-xl p-4">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center">
-                <div
-                  className={`w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center mr-3`}
-                >
+                <div className="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center mr-3">
                   <div className="text-white">{metric.icon}</div>
                 </div>
                 <span className="text-gray-300">{metric.name}</span>
               </div>
-              <FiMoreHorizontal
-                size={20}
-                className="text-gray-500 cursor-pointer active:bg-gray-800 rounded-full"
-              />
+              <FiMoreHorizontal className="text-gray-500 cursor-pointer active:bg-gray-800 rounded-full" />
             </div>
             <div className="flex items-end">
               <span className="text-4xl font-bold">{metric.value}</span>
@@ -171,107 +182,78 @@ export const DashboardContent = () => {
         ))}
       </div>
 
-      {/* Visitors Section */}
+      {/* Pie Chart */}
       <div className="bg-[#0b1739] rounded-xl p-6 mb-5">
         <div className="mb-6">
-          <h2 className="text-xl font-bold">Website Visitors</h2>
-
-          <PieChart
-            series={[
-              {
-                data: desktopOS,
-                highlightScope: { fade: "global", highlight: "item" },
-                faded: {
-                  innerRadius: 30,
-                  additionalRadius: -30,
-                  color: "white",
-                },
-                valueFormatter,
-              },
-            ]}
-            width={200}
-            height={200}
-            sx={{
-              "& .MuiChartsLegend-root": {
-                color: "white", // legend label color
-              },
-            }}
-          />
+          <h2 className="text-xl font-bold">Image Status Distribution</h2>
+          {loading ? (
+            <div className="flex justify-center items-center p-10">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500" />
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <PieChart
+                series={[
+                  {
+                    data: imageStatusData,
+                    highlightScope: { fade: "global", highlight: "item" },
+                    faded: { innerRadius: 30, additionalRadius: -30, color: "white" },
+                    valueFormatter: countFormatter,
+                  },
+                ]}
+                colors={["#22c55e", "#facc15", "#ef4444"]}
+                width={400}
+                height={200}
+                sx={{
+                  "& .MuiChartsLegend-root": { color: "white" },
+                  "& .MuiChartsPieArcLabel-root": { fill: "white" },
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Visitors Line Chart */}
       <div className="bg-[#0b1739] rounded-xl p-6 mb-5">
         <div className="mb-6">
           <h2 className="text-xl font-bold">Website Visitors</h2>
-
           <LineChart
-            xAxis={[
-              {
-                data: [1, 2, 3, 5, 8, 10],
-                tickLabelStyle: { fill: "white" },
-              },
-            ]}
-            yAxis={[
-              {
-                tickLabelStyle: { fill: "white" },
-              },
-            ]}
-            series={[
-              {
-                data: [2, 5.5, 2, 8.5, 1.5, 5],
-              },
-            ]}
+            xAxis={[{ data: [1, 2, 3, 5, 8, 10], tickLabelStyle: { fill: "white" } }]}
+            yAxis={[{ tickLabelStyle: { fill: "white" } }]}
+            series={[{ data: [2, 5.5, 2, 8.5, 1.5, 5] }]}
             height={300}
             sx={{
-              "& .MuiChartsAxis-tickLabel": {
-                fill: "white",
-              },
-              "& .MuiChartsAxis-line": {
-                stroke: "white",
-              },
+              "& .MuiChartsAxis-tickLabel": { fill: "white" },
+              "& .MuiChartsAxis-line": { stroke: "white" },
             }}
           />
         </div>
       </div>
+
+      {/* Bar Chart */}
       <div className="bg-[#0b1739] rounded-xl p-6">
         <div className="mb-6">
           <h2 className="text-xl font-bold">Website Visitors</h2>
         </div>
         <BarChart
-      series={[
-        { data: [4, 2, 5, 4, 1], stack: 'A', label: 'Series A1' },
-        { data: [2, 8, 1, 3, 1], stack: 'A', label: 'Series A2' },
-        { data: [14, 6, 5, 8, 9], label: 'Series B1' },
-      ]}
-      barLabel={(item, context) => {
-        if ((item.value ?? 0) > 10) {
-          return 'High';
-        }
-        return context.bar.height < 60 ? null : item.value?.toString();
-      }}
-      height={350}
-      sx={{
-        // Axis tick labels
-        '& .MuiChartsAxis-tickLabel': {
-          fill: 'white',
-        },
-        // Axis lines
-        '& .MuiChartsAxis-line': {
-          stroke: 'white',
-        },
-        // Grid lines
-        '& .MuiChartsGrid-line': {
-          stroke: 'rgba(255,255,255,0.2)',
-        },
-        // Bar labels
-        '& .MuiChartsBar-label': {
-          fill: 'white',
-        },
-        // Legend labels
-        '& .MuiChartsLegend-root': {
-          color: 'white',
-        },
-      }}
-    />
+          series={[
+            { data: [4, 2, 5, 4, 1], stack: "A", label: "Series A1" },
+            { data: [2, 8, 1, 3, 1], stack: "A", label: "Series A2" },
+            { data: [14, 6, 5, 8, 9], label: "Series B1" },
+          ]}
+          barLabel={(item, context) =>
+            item.value > 10 ? "High" : context.bar.height < 60 ? null : item.value.toString()
+          }
+          height={350}
+          sx={{
+            "& .MuiChartsAxis-tickLabel": { fill: "white" },
+            "& .MuiChartsAxis-line": { stroke: "white" },
+            "& .MuiChartsGrid-line": { stroke: "rgba(255,255,255,0.2)" },
+            "& .MuiChartsBar-label": { fill: "white" },
+            "& .MuiChartsLegend-root": { color: "white" },
+          }}
+        />
       </div>
     </div>
   );

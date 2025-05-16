@@ -82,8 +82,6 @@ const Login = () => {
 
     try {
       const response = await PostApi('auth/login', { email, password });
-      console.log(response);
-
       if (response && response.success) {
         dispatch(loginSuccess({ user: response.user }));
         toast.success("Login successfully!");
