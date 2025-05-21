@@ -12,6 +12,8 @@ import Profile from "./components/Profile/Profile";
 import Subscription from "./components/Profile/Subscription";
 import Download from "./components/Profile/Download";
 import Collection from "./components/Profile/Collection";
+import PrivacyPolicy from "./components/policies/PrivacyPolicy";
+import TermsAndConditions from "./components/policies/TermsAndConditions";
 const Dashboard = React.lazy(() => import("./components/Dashboard/Dashboard"));
 const ContactUs = React.lazy(() => import("./components/ContactUs/ContactUs"));
 const AboutUs = React.lazy(() => import("./components/AboutUs/AboutUs"));
@@ -57,6 +59,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/exploreAll" element={<ExploreAll />} />
+            <Route path="/p" element={<TermsAndConditions />} />
           </Route>
           <Route path="user" element={<ViewLayout />}>
             <Route path="profile" element={<Profile/>} />

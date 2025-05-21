@@ -5,13 +5,18 @@ import image from "../../assets/animation.gif";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { MdHighQuality, MdOtherHouses } from "react-icons/md";
 import { PiDownloadDuotone } from "react-icons/pi";
-import mahadev from "../../assets/MahadevWallper.jpg";
 import { useNavigate } from "react-router-dom";
-import first from "../../assets/1.png"
-import sec from "../../assets/2.png"
-import third from "../../assets/3.png"
-import fourth from "../../assets/4.png"
-import fifth from "../../assets/5.png"
+import first from "../../assets/1.png";
+import sec from "../../assets/2.png";
+import third from "../../assets/3.png";
+import fourth from "../../assets/4.png";
+import fifth from "../../assets/5.png";
+import ps from "../../assets/ps.jpg";
+import corel from "../../assets/corel.png";
+import tshirt from "../../assets/tshirt.jpg";
+import wed from "../../assets/wedding.jpg";
+import icon from "../../assets/icon.png";
+import nature from "../../assets/nature.jpeg";
 
 const Typewriter = ({ texts, period = 2000 }) => {
   const [text, setText] = useState("");
@@ -52,41 +57,41 @@ const Typewriter = ({ texts, period = 2000 }) => {
 };
 
 const TypewriterComponent = () => {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const handlenavigate = () => {
     navigate("/exploreAll");
-  }
+  };
 
   const iconFamilies = [
     {
-      title: "Special Lineal",
-      imgSrc: mahadev,
-      author: "Freepik",
+      title: "Photoshop Design",
+      imgSrc: ps,
+      author: "A8th Creation",
     },
     {
-      title: "Basic Rounded Lineal",
-      imgSrc: null, // Changed from empty string to null
-      author: "Freepik",
+      title: "CorelDraw Design",
+      imgSrc: corel,
+      author: "A8th Creation",
     },
     {
-      title: "Special Lineal Color",
-      imgSrc: mahadev,
-      author: "Freepik",
+      title: "T-shirt Design",
+      imgSrc: tshirt,
+      author: "A8th Creation",
     },
     {
-      title: "Special Lineal Color",
-      imgSrc: mahadev,
-      author: "Freepik",
+      title: "Wedding Card Design",
+      imgSrc: wed,
+      author: "A8th Creation",
     },
     {
-      title: "Special Lineal Color",
-      imgSrc: mahadev,
-      author: "Freepik",
+      title: "Icon Design",
+      imgSrc: icon,
+      author: "A8th Creation",
     },
     {
-      title: "Special Lineal Color",
-      imgSrc: mahadev,
-      author: "Freepik",
+      title: "Nature Photos",
+      imgSrc: nature,
+      author: "A8th Creation",
     },
   ];
   const data = {
@@ -163,7 +168,10 @@ const TypewriterComponent = () => {
         <span className="mt-2 md:text-[16px] text-[12px]">
           10M+ free PNG and SVG icons, including the one you have in mind
         </span>
-        <button onClick={handlenavigate} className="flex items-center gap-2 border-2 rounded-sm p-2 mt-7 bg-cyan-800 hover:bg-cyan-900 cursor-pointer">
+        <button
+          onClick={handlenavigate}
+          className="flex items-center gap-2 border-2 rounded-sm p-2 mt-7 bg-cyan-800 hover:bg-cyan-900 cursor-pointer"
+        >
           Explore Now <FaChevronCircleRight size={18} />
         </button>
       </div>
@@ -181,7 +189,10 @@ const TypewriterComponent = () => {
             </p>
           </div>
           <div className="mt-6 text-right">
-            <button onClick={handlenavigate} className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white cursor-pointer">
+            <button
+              onClick={handlenavigate}
+              className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white cursor-pointer"
+            >
               Discover more
             </button>
           </div>
@@ -202,7 +213,7 @@ const TypewriterComponent = () => {
               )}
               <h3 className="mt-3 font-semibold">{family.title}</h3>
               <p className="text-sm text-gray-500">
-                icons by <span className="text-blue-500">{family.author}</span>
+                Images & icons by <span className="text-blue-500">{family.author}</span>
               </p>
               <button className="flex items-center gap-2 mt-3 px-4 py-2 bg-gray-200 text-gray-700 rounded-md text-sm">
                 Explore
@@ -256,20 +267,53 @@ const TypewriterComponent = () => {
       </section>
 
       <div className="relative">
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-200 to-blue-200">
-          <h2 className="text-4xl font-bold">The First slide</h2>
-          <p className="mt-2">Scroll Down for next slide</p>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-[url('././assets/first.jpg')] bg-cover bg-center text-white">
+          <h2 className="text-5xl w-200 text-center font-bold font-serif">
+            Discover a World of Visual Inspiration
+          </h2>
+          <p className="mt-4 px-25 text-lm text-center">
+            "Immerse yourself in an ever-growing library of stunning
+            photographs, digital illustrations, and visual art from creators
+            worldwide. Whether you’re looking for design ideas, reference
+            images, or just exploring beautiful content, our curated
+            collections, trending tags, and featured artists make it easy to
+            find something inspiring every day."
+          </p>
         </div>
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-800 to-purple-800 text-white">
-          <h2 className="text-4xl font-bold">The Second slide</h2>
-          <p className="mt-2">Scroll Down for next slide</p>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-[url('././assets/second.jpg')] bg-cover bg-center text-white">
+          <h2 className="text-5xl w-200 text-center font-bold font-serif">
+            Effortless Image Upload and Management
+          </h2>
+          <p className="mt-4 px-25 text-lm text-center">
+            "Upload your photos in just a few clicks with our intuitive
+            drag-and-drop uploader. Organize them seamlessly into folders or
+            collections, tag them for better discoverability, and enjoy
+            automatic optimization that ensures fast loading and top-notch
+            visual quality—no technical skills required."
+          </p>
         </div>
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-800 to-pink-800 text-white">
-          <h2 className="text-4xl font-bold">The Third slide</h2>
-          <p className="mt-2">Scroll Down</p>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-[url('././assets/third.jpg')] bg-cover bg-center text-white">
+          <h2 className="text-5xl w-200 text-center font-bold font-serif">
+            Collaborate and Share with Precision
+          </h2>
+          <p className="mt-4 px-25 text-lm text-center">
+            "Whether you’re working with clients, a creative team, or showcasing
+            a portfolio, our platform makes collaboration simple. Share selected
+            collections via secure links, control permissions (view, download,
+            comment), and gather real-time feedback—all in one organized space."
+          </p>
         </div>
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-200 to-indigo-100 text-black">
-          <h2 className="text-4xl font-bold">The Fourth slide</h2>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-[url('././assets/fourth.jpg')] bg-cover bg-center text-white">
+          <h2 className="text-5xl w-200 text-center font-bold font-serif">
+            Flexible Downloads and Format Support
+          </h2>
+          <p className="mt-4 px-25 text-lm text-center">
+            "Choose the download settings that suit your project—web-friendly
+            JPEGs, high-resolution PNGs, or original RAW files. Select image
+            dimensions, quality levels, or preset aspect ratios based on where
+            your content will be used: websites, presentations, social media, or
+            print."
+          </p>
         </div>
       </div>
 
