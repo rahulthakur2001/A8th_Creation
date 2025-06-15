@@ -180,7 +180,7 @@ const TypewriterComponent = () => {
         <div className="flex items-center justify-between md:flex-row flex-col">
           <div>
             <h2 className="text-2xl font-bold">
-              Curated icon families for{" "}
+              Created icon families for{" "}
               <span className="text-blue-600">seamless design </span>
             </h2>
             <p className="text-gray-600">
@@ -268,10 +268,10 @@ const TypewriterComponent = () => {
 
       <div className="relative">
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-[url('././assets/first.jpg')] bg-cover bg-center text-white">
-          <h2 className="text-5xl w-200 text-center font-bold font-serif">
+          <h2 className="md:text-5xl drop-shadow-2xl text-3xl md:w-200 text-center font-bold font-serif">
             Discover a World of Visual Inspiration
           </h2>
-          <p className="mt-4 px-25 text-lm text-center">
+          <p className="mt-4 md:px-25 md:text-[15px] w-80 md:w-full text-sm text-center">
             "Immerse yourself in an ever-growing library of stunning
             photographs, digital illustrations, and visual art from creators
             worldwide. Whether you’re looking for design ideas, reference
@@ -281,10 +281,10 @@ const TypewriterComponent = () => {
           </p>
         </div>
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-[url('././assets/second.jpg')] bg-cover bg-center text-white">
-          <h2 className="text-5xl w-200 text-center font-bold font-serif">
+          <h2 className="md:text-5xl drop-shadow-2xl text-3xl md:w-200 text-center font-bold font-serif">
             Effortless Image Upload and Management
           </h2>
-          <p className="mt-4 px-25 text-lm text-center">
+          <p className="mt-4 md:px-25 md:text-[15px] w-80 md:w-full text-sm text-center">
             "Upload your photos in just a few clicks with our intuitive
             drag-and-drop uploader. Organize them seamlessly into folders or
             collections, tag them for better discoverability, and enjoy
@@ -293,10 +293,10 @@ const TypewriterComponent = () => {
           </p>
         </div>
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-[url('././assets/third.jpg')] bg-cover bg-center text-white">
-          <h2 className="text-5xl w-200 text-center font-bold font-serif">
+          <h2 className="md:text-5xl drop-shadow-2xl text-3xl md:w-200 text-center font-bold font-serif">
             Collaborate and Share with Precision
           </h2>
-          <p className="mt-4 px-25 text-lm text-center">
+          <p className="mt-4 md:px-25 md:text-[15px] w-80 md:w-full text-sm text-center">
             "Whether you’re working with clients, a creative team, or showcasing
             a portfolio, our platform makes collaboration simple. Share selected
             collections via secure links, control permissions (view, download,
@@ -304,10 +304,10 @@ const TypewriterComponent = () => {
           </p>
         </div>
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center bg-[url('././assets/fourth.jpg')] bg-cover bg-center text-white">
-          <h2 className="text-5xl w-200 text-center font-bold font-serif">
+          <h2 className="md:text-5xl drop-shadow-2xl text-3xl md:w-200 text-center font-bold font-serif">
             Flexible Downloads and Format Support
           </h2>
-          <p className="mt-4 px-25 text-lm text-center">
+          <p className="mt-4 md:px-25 md:text-[15px] w-80 md:w-full text-sm text-center">
             "Choose the download settings that suit your project—web-friendly
             JPEGs, high-resolution PNGs, or original RAW files. Select image
             dimensions, quality levels, or preset aspect ratios based on where

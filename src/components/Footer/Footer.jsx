@@ -1,5 +1,6 @@
 import React from "react";
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export const Footer = () => {
   return (
@@ -15,30 +16,38 @@ export const Footer = () => {
                 Find us on any of these platforms, we respond 1-2 business days.
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
+                <a href="https://www.facebook.com/profile.php?id=61576366090188">
                 <button
                   className="bg-white text-lightBlue-400 shadow-lg p-2 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 cursor-pointer"
                   type="button"
                 >
                   <FaFacebook size={25} color="blue" className="hover:scale-150"/>
                 </button>
+                </a>
+                <a href="https://www.instagram.com/a8thcreation/">
                 <button
                   className="bg-white text-lightBlue-400 shadow-lg p-2 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 cursor-pointer"
                   type="button"
                 >
                   <FaInstagram size={25} color="purple" className="hover:scale-140"/>
                 </button>
+                </a>
+                <a href="https://x.com/A8thCreation">
                 <button
                   className="bg-white text-lightBlue-400 shadow-lg p-2 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 cursor-pointer"
                   type="button"
                 >
-                  <FaTwitter size={25} color="cyan" className="hover:scale-130"/>
+                  <FaXTwitter size={25} color="black" className="hover:scale-130"/>
                 </button>
+                </a>
+                <a href="https://www.youtube.com/@A8thCreation">
                 <button
                   className="bg-white text-lightBlue-400 shadow-lg p-2 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 cursor-pointer"
                   type="button"
                 >
                   <FaYoutube size={25} color="red" className="hover:scale-130"/>
                 </button>
+                </a>
               </div>
             </div>
             <div className="w-full lg:w-6/12 px-4">

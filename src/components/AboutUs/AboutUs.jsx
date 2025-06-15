@@ -2,7 +2,17 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { BiChevronRight } from "react-icons/bi";
+import { BiChevronRight, BiLogoGmail } from "react-icons/bi";
+import {
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa";
+import dev1 from "../../assets/rahul.png"
+import dev2 from "../../assets/harsh.png"
+import ImageSlider from "./ImageSlider";
 
 const AboutUs = () => {
   const [openIndex, setOpenIndex] = useState(-1);
@@ -217,7 +227,7 @@ const AboutUs = () => {
         </div>
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-2xl md:text-4xl font-semibold">
-          Your Ideas Express With Us
+            Your Ideas Express With Us
           </h1>
           <p className="mt-5 md:mt-10 md:text-lg md:w-full w-90 md:pr-20 md:pb-0 pb-5">
             At A8th Creation, we believe that every idea has the potential to
@@ -275,6 +285,11 @@ const AboutUs = () => {
         </div>
       </div>
 
+      <div className="min-h-screen bg-gray-100 p-6">
+        <h1 className="text-3xl font-bold text-center mb-8">Image Slider</h1>
+        <ImageSlider />
+      </div>
+
       <div className="w-full h-full">
         <div className="pt-5 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold">
@@ -288,17 +303,17 @@ const AboutUs = () => {
         </div>
 
         <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-15 md:px-18 px-7">
-        {cards.map((card, index) => (
-        <div key={index} className="w-full">
-          <img
-            src={card.img}
-            alt={card.title}
-            className="w-20 h-20 rounded-md border-2 p-1 border-gray-600"
-          />
-          <h2 className="mt-4 font-semibold text-xl">{card.title}</h2>
-          <p className="mt-4 text-sm md:text-base">{card.description}</p>
-        </div>
-      ))}
+          {cards.map((card, index) => (
+            <div key={index} className="w-full">
+              <img
+                src={card.img}
+                alt={card.title}
+                className="w-20 h-20 rounded-md border-2 p-1 border-gray-600"
+              />
+              <h2 className="mt-4 font-semibold text-xl">{card.title}</h2>
+              <p className="mt-4 text-sm md:text-base">{card.description}</p>
+            </div>
+          ))}
         </div>
       </div>
       <section className="w-full h-full">
@@ -368,6 +383,98 @@ const AboutUs = () => {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+      <div className="m-5 bg-cyan-900 p-10 rounded-2xl">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-white">Meet Our Developers</h1>
+          <p className="text-gray-200 mt-2">
+            Talented minds behind our platform
+          </p>
+        </div>
+        <div className="flex justify-center gap-10">
+          <div class="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800">
+            <img
+              src={dev1}
+              alt=""
+              class="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 border-2 aspect-square"
+            />
+            <div class="space-y-4 text-center divide-y dark:divide-gray-300">
+              <div class="my-2 space-y-1">
+                <h2 class="text-xl font-semibold sm:text-2xl">Rahul</h2>
+                <p class="px-5 text-xs sm:text-base dark:text-gray-600">
+                  Full-stack developer
+                </p>
+              </div>
+              <div class="flex justify-center items-center pt-2 space-x-4 align-center">
+                <a
+                  href="https://github.com/rahulthakur2001"
+                  class="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-700 hover:scale-125"
+                >
+                  <FaGithub size="20" classname="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.instagram.com/itz__rahulthakur?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                  class="p-2 rounded-md dark:text-gray-800 hover:dark:text-pink-600 hover:scale-125"
+                >
+                  <FaInstagram size="20" classname="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/rahul-kumar-631211257/"
+                  class="p-2 rounded-md dark:text-gray-800 hover:dark:text-blue-600 hover:scale-125"
+                >
+                  <FaLinkedin size="20" classname="w-4 h-4" />
+                </a>
+                <a
+                  href="mailto:rahulthakur95609@gmail.com"
+                  class="p-2 rounded-md dark:text-gray-800 hover:dark:text-red-600 hover:scale-125"
+                >
+                  <BiLogoGmail size="20" classname="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800">
+            <img
+              src={dev2}
+              alt=""
+              class="w-32 h-32 object-contain mx-auto rounded-full dark:bg-gray-500 border-2 aspect-square"
+            />
+            <div class="space-y-4 text-center divide-y dark:divide-gray-300">
+              <div class="my-2 space-y-1">
+                <h2 class="text-xl font-semibold sm:text-2xl">Raj Kumar</h2>
+                <p class="px-5 text-xs sm:text-base dark:text-gray-600">
+                  Frontend developer
+                </p>
+              </div>
+              <div class="flex justify-center items-center pt-2 space-x-4 align-center">
+                <a
+                  href="https://github.com/Raj05052002"
+                  class="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-700 hover:scale-125"
+                >
+                  <FaGithub size="20" classname="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.instagram.com/harshk__07/?__pwa=1"
+                  class="p-2 rounded-md dark:text-gray-800 hover:dark:text-pink-600 hover:scale-125"
+                >
+                  <FaInstagram size="20" classname="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/raj-kumar-67736923b/"
+                  class="p-2 rounded-md dark:text-gray-800 hover:dark:text-blue-600 hover:scale-125"
+                >
+                  <FaLinkedin size="20" classname="w-4 h-4" />
+                </a>
+                <a
+                  href="mailto:thrajkumar9@gmail.com"
+                  class="p-2 rounded-md dark:text-gray-800 hover:dark:text-red-600 hover:scale-125"
+                >
+                  <BiLogoGmail size="20" classname="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
