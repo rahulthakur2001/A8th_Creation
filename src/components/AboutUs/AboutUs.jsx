@@ -10,9 +10,18 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
-import dev1 from "../../assets/rahul.png"
-import dev2 from "../../assets/harsh.png"
+import dev1 from "../../assets/rahul.png";
+import dev2 from "../../assets/harsh.png";
+import review1 from "../../assets/review1.jpg";
+import review2 from "../../assets/review2.jpg";
+import review3 from "../../assets/review3.jpg";
+import review4 from "../../assets/review4.jpg";
+import company1 from "../../assets/asign.png";
+import company2 from "../../assets/sarsky.jpg";
+import company3 from "../../assets/ziso.png";
+import tree from "../../assets/tree.jpg";
 import ImageSlider from "./ImageSlider";
+
 
 const AboutUs = () => {
   const [openIndex, setOpenIndex] = useState(-1);
@@ -102,23 +111,23 @@ const AboutUs = () => {
 
   const cardData = [
     {
-      image:
-        "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      text: "A8th Creation is the ultimate solution for the best tools for any creative work. I LOVE IT!!!",
+      Name:"Roshan",
+      image:review1,
+      text: "A fantastic resource for designers—clean, professional visuals and everything is easy to download!",
     },
     {
-      image:
-        "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      text: "A8th Creation is the ultimate solution for the best tools for any creative work. I LOVE IT!!!",
+      Name:"Ashutosh",
+      image:review2,
+      text: "Great experience! Whether you're a beginner or pro, you'll find exactly what you need here.",
     },
     {
-      image:
-        "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      text: "A8th Creation is the ultimate solution for the best tools for any creative work. I LOVE IT!!!",
+      Name:"Annu",
+      image:review3,
+      text: "This website is a hidden gem for creative professionals. Easy access, fresh content, and great customer support!",
     },
     {
-      image:
-        "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      Name:"Mohit",
+      image:review4,
       text: "A8th Creation is the ultimate solution for the best tools for any creative work. I LOVE IT!!!",
     },
   ];
@@ -198,7 +207,7 @@ const AboutUs = () => {
 
         <div className="flex-1 flex flex-col md:flex-row justify-between gap-1 md:p-0 p-5 max-sm:hidden">
           <img
-            src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src="https://images.pexels.com/photos/21077133/pexels-photo-21077133.jpeg"
             alt=""
             className="w-full md:w-55 md:rounded-t-full h-50 md:h-50 mt-5 md:mt-80"
           />
@@ -220,9 +229,9 @@ const AboutUs = () => {
       <div className="w-full flex items-center h-full md:flex-row flex-col md:p-10 gap-10 md:mt-0 mt-10">
         <div className="flex-1 flex gap-0 md:p-0 p-5 w-full">
           <img
-            src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt=""
-            className="w-full h-80"
+            src={tree}
+            alt="tree"
+            className="w-full h-100 object-contain"
           />
         </div>
         <div className="flex-1 text-center md:text-left">
@@ -329,16 +338,18 @@ const AboutUs = () => {
               {Array.isArray(cardData) &&
                 cardData.map((item, index) => (
                   <div>
-                    <div className="w-full md:h-30 h-60 mb-5 m-auto flex flex-col md:flex-row gap-2 md:rounded-bl-full rounded-tr-full md:bg-gray-600 bg-amber-300 shadow-lg p-5 md:px-10 border-2">
+                    <div className="w-full md:h-40 h-60 mb-5 m-auto flex flex-col md:flex-row gap-2 md:rounded-bl-full rounded-tr-full md:bg-gray-600 bg-amber-300 shadow-lg p-5 md:px-10 border-2">
                       <img
-                        src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        src={item.image}
                         alt="image"
                         className="w-20 h-20 rounded-full border-2 border-gray-200 bg-gray-800 p-1"
                       />
-                      <p className="px-1 overflow-hidden text-white text-ellipsis max-w-[calc(100%-5rem)]">
-                        A8th Creation is the ultimate solution for the best
-                        tools for any creative work. I LOVE IT!!!
+                      <div className="">
+                      <h1 className="text-white px-2 font-bold">{item.Name}</h1>
+                      <p className="px-1 overflow-hidden text-white text-ellipsis max-w-[calc(100%)]">
+                        "{item.text}"
                       </p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -349,10 +360,15 @@ const AboutUs = () => {
               Trusted by the same companies you love
             </p>
           </div>
+          <div className="flex gap-15 items-center justify-center py-10">
+          <img src={company1} alt="asign" width={150} height={100}/>
+          <img src={company2} alt="sarsky" width={150} height={100}/>
+          <img src={company3} alt="zios" width={150} height={100}/>
+          </div>
         </div>
       </section>
 
-      <div className="w-full mt-100 md:px-20 px-5 pb-10">
+      <div className="w-full mt-10 md:px-20 px-5 pb-10">
         <h2 className="text-3xl font-bold text-blue-900">{faqData.head}</h2>
         <p className="text-gray-600 mt-2 text-left">{faqData.description}</p>
 
