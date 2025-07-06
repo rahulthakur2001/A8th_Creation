@@ -42,7 +42,8 @@ const ContactUs = () => {
     }))
   }
 
-  const handleSumbit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Corrected typo from 'pereventDefault' to 'preventDefault'
     try {
       const response = await PostApi('contact/create', formData);
       if (response.status) {
@@ -50,9 +51,11 @@ const ContactUs = () => {
       }
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.message || "Something went wrong"); // Added fallback
     }
-  }
-  
+  };
+
+
   return (
     <div>
       <div className="w-full min-h-screen p-10">
@@ -114,7 +117,7 @@ const ContactUs = () => {
               You can reach us anytime
             </p>
 
-            <form>
+            <form onSubmit={handleSubmit}>
               {/* Name */}
               <div className="grid grid-cols-2 gap-4">
                 <input
@@ -174,7 +177,7 @@ const ContactUs = () => {
               ></textarea>
 
               {/* Submit Button */}
-              <button className="w-full mt-4 bg-blue-600 text-white p-3 rounded-4xl" onClick={handleSumbit}>
+              <button className="w-full mt-4 bg-blue-600 text-white p-3 rounded-4xl">
                 Submit
               </button>
             </form>
