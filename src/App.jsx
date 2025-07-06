@@ -59,7 +59,8 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/exploreAll" element={<ExploreAll />} />
-            <Route path="/p" element={<TermsAndConditions />} />
+            <Route path="/term-and-condition" element={<TermsAndConditions />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Route>
           <Route path="user" element={<ViewLayout />}>
             <Route path="profile" element={<Profile/>} />
