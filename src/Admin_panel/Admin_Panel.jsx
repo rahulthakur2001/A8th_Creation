@@ -16,6 +16,7 @@ import { AllImagesContent } from "./AllImagesContent";
 import { ManageContent } from "./ManageContent";
 import { NotificationContent } from "./NotificationContent";
 import Admin_Upload from "./Admin_Upload";
+import { InqueryDetails } from "./InqueryDetails";
 
 const Admin_Panel = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -31,6 +32,8 @@ const Admin_Panel = () => {
         return <UsersContent />;
       case "AllImages":
         return <AllImagesContent />;
+      case "InqueryDetails":
+        return <InqueryDetails />;
       case "UploadImages":
         return <Admin_Upload />;
       case "Manage":
@@ -78,6 +81,11 @@ const Admin_Panel = () => {
               name: "Upload Images",
               icon: <IoMdImages size={18} />,
               tab: "UploadImages",
+            },
+            {
+              name: "Inquery Details",
+              icon: <IoMdImages size={18} />,
+              tab: "InqueryDetails",
             },
             {
               name: "Updates & Manage",

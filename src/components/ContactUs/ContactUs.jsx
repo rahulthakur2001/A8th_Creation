@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Faq from "../Dashboard/Faq";
+import PostApi from "../../APIs/Postapi";
+import { toast } from "react-toastify";
 
 const ContactUs = () => {
   const faqs = [
@@ -29,6 +31,28 @@ const ContactUs = () => {
         "Free images may require attribution and have limited resolutions, while premium images come with higher quality, exclusive rights, and no attribution requirements.",
     },
   ];
+
+  const [formData, setFormData] = useState();
+
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleSumbit = async () => {
+    try {
+      const response = await PostApi('contact/create', formData);
+      if (response.status) {
+        toast.success(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   return (
     <div>
       <div className="w-full min-h-screen p-10">
@@ -95,12 +119,17 @@ const ContactUs = () => {
               <div className="grid grid-cols-2 gap-4">
                 <input
                   type="text"
+                  name="firstName"
+                  required
                   placeholder="First name"
+                  onChange={handleChangeInput}
                   className="w-full p-3 border border-gray-400 rounded-4xl"
                 />
                 <input
                   type="text"
+                  name="lastName"
                   placeholder="Last name"
+                  onChange={handleChangeInput}
                   className="w-full p-3 border border-gray-400 rounded-4xl"
                 />
               </div>
@@ -110,7 +139,10 @@ const ContactUs = () => {
                 <span className="absolute left-3 top-3">📧</span>
                 <input
                   type="email"
+
+                  name="email"
                   placeholder="Your email"
+                  onChange={handleChangeInput}
                   className="w-full p-3 pl-10 border border-gray-400 rounded-4xl"
                 />
               </div>
@@ -125,6 +157,8 @@ const ContactUs = () => {
                 <input
                   type="text"
                   placeholder="Phone number"
+                  name="phone"
+                  onChange={handleChangeInput}
                   className="w-full p-3 border border-gray-400 rounded-r-4xl"
                 />
               </div>
@@ -134,11 +168,13 @@ const ContactUs = () => {
                 minlength="3"
                 maxlength="120"
                 placeholder="How can we help?"
+                name="description"
+                onChange={handleChangeInput}
                 className="w-full p-3 border border-gray-400 rounded-3xl mt-4 h-28 max-h-30"
               ></textarea>
 
               {/* Submit Button */}
-              <button className="w-full mt-4 bg-blue-600 text-white p-3 rounded-4xl">
+              <button className="w-full mt-4 bg-blue-600 text-white p-3 rounded-4xl" onClick={handleSumbit}>
                 Submit
               </button>
             </form>
