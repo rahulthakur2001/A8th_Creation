@@ -26,8 +26,8 @@ export const DashboardContent = () => {
     const fetchDashboardStats = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:4000/image/dashboard/stats");
-        const data = await response.json();
+        const response = await Getapi("image/dashboard/stats")
+        const {data} = response;
         if (data) {
           setDashboardStats(data);
         }
