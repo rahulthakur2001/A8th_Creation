@@ -1,3 +1,4 @@
+import "./app.css";
 import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { MainLayout } from "./components/Layouts/MainLayout";
@@ -51,7 +52,7 @@ function App() {
       <Suspense fallback={<Loder />}>
         <Routes>
           
-          <Route path="/admin" element={<AdminProtected><Admin_Panel /></AdminProtected>} />
+          <Route path="/admin" element={<Admin_Panel />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotfound />} />
           <Route element={<MainLayout />}>

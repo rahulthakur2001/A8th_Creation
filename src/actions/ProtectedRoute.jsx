@@ -15,6 +15,8 @@ const AdminProtected = ({ children }) => {
   if (loading) return <Loder/>;
 
   const isAdmin = user?.role?.includes("Admin");
+  console.log("User Role:", user?.role, "Is Admin:", isAdmin);
+  
   if (!user || !isAdmin) {
     return <Navigate to="/login" replace />;
   }

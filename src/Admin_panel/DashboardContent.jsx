@@ -22,12 +22,16 @@ export const DashboardContent = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
+  console.log("Dashboard Content Rendered", user);
+  
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:4000/image/dashboard/stats");
-        const data = await response.json();
+        const response = await Getapi("image/userDownload?page=1&limit=1")
+        setImages(response.data.images || []);
+        
+        const { data } = response;
         if (data) {
           setDashboardStats(data);
         }

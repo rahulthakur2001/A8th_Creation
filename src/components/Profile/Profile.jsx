@@ -15,13 +15,25 @@ const Profile = () => {
   const [avatarFile, setAvatarFile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   // Fetch user data
   useEffect(() => {
+    if (!userId) {
+      setLoading(false);
+      setError("Unauthorized. Please log in.");
+      return;
+    }
+
     const fetchUser = async () => {
       try {
         const res = await Getapi(`user/${userId}`);
-        const fetchedUser = res.data.user;
+        const fetchedUser = res.data?.user;
+
+        if (!fetchedUser) {
+          throw new Error("User data not returned");
+        }
+
         setUser(fetchedUser);
         setName(fetchedUser.name);
         setAvatarPreview(fetchedUser.avatar?.url || "https://via.placeholder.com/100");
@@ -33,10 +45,9 @@ const Profile = () => {
       }
     };
 
-    if (userId) fetchUser();
+    fetchUser();
   }, [userId]);
 
-  // Handle avatar change (file upload)
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -45,13 +56,11 @@ const Profile = () => {
     }
   };
 
-  // Remove avatar
   const handleRemoveAvatar = () => {
     setAvatarFile(null);
     setAvatarPreview("https://via.placeholder.com/100");
   };
 
-  // Update profile (name and avatar)
   const handleProfileUpdate = async () => {
     const formData = new FormData();
     formData.append("name", name);
@@ -61,7 +70,6 @@ const Profile = () => {
       setSaving(true);
       const res = await PatchApi(`user/update/${userId}`, formData);
 
-      // Handle response
       if (res?.updatedUser) {
         setUser(res.updatedUser);
         setName(res.updatedUser.name);
@@ -70,8 +78,7 @@ const Profile = () => {
         setEditingName(false);
         setAvatarFile(null);
       } else {
-        toast.error("Unexpected server response");
-        console.error("Unexpected response:", res);
+        throw new Error("Unexpected response");
       }
     } catch (err) {
       console.error("Update failed:", err);
@@ -83,10 +90,24 @@ const Profile = () => {
 
   if (loading) return <Loder />;
 
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-80 text-center text-red-600">
+        <ToastContainer />
+        <p className="text-xl font-semibold mb-4">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-4xl mx-auto">
-      <ToastContainer/>
-
+      <ToastContainer />
       <main className="p-4 md:p-8">
         <h2 className="text-2xl md:text-3xl font-semibold mb-6">Profile Details</h2>
 
@@ -139,22 +160,26 @@ const Profile = () => {
             </button>
           </div>
 
-          {/* Email */}
-          <div className="md:flex items-center gap-4">
-            <label className="w-32 text-gray-600">Email</label>
-            <input
-              type="text"
-              value={user.email}
-              disabled
-              className="flex-1 border border-gray-300 p-2 rounded-md bg-gray-100 cursor-not-allowed"
-            />
-          </div>
+          {/* Email (check user exists first) */}
+          {user?.email && (
+            <div className="md:flex items-center gap-4">
+              <label className="w-32 text-gray-600">Email</label>
+              <input
+                type="text"
+                value={user.email}
+                disabled
+                className="flex-1 border border-gray-300 p-2 rounded-md bg-gray-100 cursor-not-allowed"
+              />
+            </div>
+          )}
 
           {/* Save Button */}
           <div>
             <button
               onClick={handleProfileUpdate}
-              className={`bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 ${saving ? "opacity-70 cursor-not-allowed" : ""}`}
+              className={`bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 ${
+                saving ? "opacity-70 cursor-not-allowed" : ""
+              }`}
               disabled={saving}
             >
               {saving ? "Saving..." : "Save Changes"}
