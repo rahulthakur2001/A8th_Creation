@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',   // ✅ Use this for production deployment with nginx (important!)
   server: {
     host: true,
   },
