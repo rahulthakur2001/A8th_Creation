@@ -1,4 +1,4 @@
-import "./app.css";
+import "./App.css";
 import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { MainLayout } from "./components/Layouts/MainLayout";
