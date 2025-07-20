@@ -10,6 +10,7 @@ import { PieChart } from "@mui/x-charts/PieChart";
 import { BarChart, LineChart } from "@mui/x-charts";
 
 export const DashboardContent = () => {
+  const [menu, setMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [dashboardStats, setDashboardStats] = useState({
     totalUsers: 0,
