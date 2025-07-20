@@ -28,10 +28,8 @@ export const DashboardContent = () => {
     const fetchDashboardStats = async () => {
       try {
         setLoading(true);
-        const response = await Getapi("image/userDownload?page=1&limit=1")
-        setImages(response.data.images || []);
-        
-        const { data } = response;
+        const response = await Getapi("image/dashboard/stats")
+        const {data} = response;
         if (data) {
           setDashboardStats(data);
         }
