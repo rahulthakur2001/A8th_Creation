@@ -22,7 +22,6 @@ import company3 from "../../assets/ziso.png";
 import tree from "../../assets/tree.jpg";
 import ImageSlider from "./ImageSlider";
 
-
 const AboutUs = () => {
   const [openIndex, setOpenIndex] = useState(-1);
 
@@ -111,23 +110,23 @@ const AboutUs = () => {
 
   const cardData = [
     {
-      Name:"Roshan",
-      image:review1,
+      Name: "Roshan",
+      image: review1,
       text: "A fantastic resource for designers—clean, professional visuals and everything is easy to download!",
     },
     {
-      Name:"Ashutosh",
-      image:review2,
+      Name: "Ashutosh",
+      image: review2,
       text: "Great experience! Whether you're a beginner or pro, you'll find exactly what you need here.",
     },
     {
-      Name:"Annu",
-      image:review3,
+      Name: "Annu",
+      image: review3,
       text: "This website is a hidden gem for creative professionals. Easy access, fresh content, and great customer support!",
     },
     {
-      Name:"Mohit",
-      image:review4,
+      Name: "Mohit",
+      image: review4,
       text: "A8th Creation is the ultimate solution for the best tools for any creative work. I LOVE IT!!!",
     },
   ];
@@ -192,7 +191,7 @@ const AboutUs = () => {
         className="flex md:h-screen overflow-hidden finisher-header"
         style={{ width: "99.9%" }}
       >
-        <div className="flex-1 md:p-15 p-5 h-max">
+        <div className="flex-[1] md:p-[4rem] p-[2rem] h-max">
           <h1 className="text-4xl md:text-5xl font-semibold">
             A8th Creation – Where Imagination Meets Design
           </h1>
@@ -209,36 +208,35 @@ const AboutUs = () => {
           <img
             src="https://images.pexels.com/photos/21077133/pexels-photo-21077133.jpeg"
             alt=""
-            className="w-full md:w-55 md:rounded-t-full h-50 md:h-50 mt-5 md:mt-80"
+            className="w-full md:w-[12rem] h-[12rem] md:h-[12.2rem] object-cover md:rounded-t-full mt-5 md:mt-80"
           />
-
           <img
             src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
-            className="w-full md:w-55 rounded-t-full h-50 md:h-90 mt-5 md:mt-40"
+            className="w-full md:w-[14rem] h-[12rem] md:h-[22.2rem] object-cover md:rounded-t-full mt-5 md:mt-[10rem]"
           />
-
           <img
             src="https://images.pexels.com/photos/1266810/pexels-photo-1266810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
-            className="w-full md:w-100 rounded-t-full h-50 md:h-80 rotate-180 mt-5 md:mt-0"
+            className="w-full md:w-[22rem] h-[12rem] md:h-[20rem] object-cover md:rounded-t-full rotate-180 mt-5 md:mt-0"
           />
         </div>
       </div>
 
-      <div className="w-full flex items-center h-full md:flex-row flex-col md:p-10 gap-10 md:mt-0 mt-10">
-        <div className="flex-1 flex gap-0 md:p-0 p-5 w-full">
+      <div className="flex items-center justify-center h-full md:flex-row flex-col md:p-10 gap-10 md:mt-0 mt-10">
+        <div className="flex-[1] flex gap-0 md:p-0 p-8 w-full justify-center">
           <img
             src={tree}
             alt="tree"
-            className="w-full h-100 object-contain"
+            className="w-[70%] h-[80%] object-contain"
           />
         </div>
+
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-2xl md:text-4xl font-semibold">
             Your Ideas Express With Us
           </h1>
-          <p className="mt-5 md:mt-10 md:text-lg md:w-full w-90 md:pr-20 md:pb-0 pb-5">
+          <p className="mt-5 md:mt-10 md:text-lg w-[90%] md:w-full md:pr-20 md:pb-0 pb-5 mx-auto md:mx-0">
             At A8th Creation, we believe that every idea has the potential to
             become something extraordinary. Whether it's a rough sketch or a
             fully-formed concept, we’re here to bring your vision to life
@@ -250,7 +248,7 @@ const AboutUs = () => {
       </div>
 
       <div>
-        <div className="p-18 bg-sky-200">
+        <div className="p-[4rem] bg-sky-200">
           <h3 className="text-2xl animate-bounce font-bold text-gray-800 text-center">
             Design With Purpose.
           </h3>
@@ -338,17 +336,19 @@ const AboutUs = () => {
               {Array.isArray(cardData) &&
                 cardData.map((item, index) => (
                   <div>
-                    <div className="w-full md:h-40 h-60 mb-5 m-auto flex flex-col md:flex-row gap-2 md:rounded-bl-full rounded-tr-full md:bg-gray-600 bg-amber-300 shadow-lg p-5 md:px-10 border-2">
+                    <div className="w-full md:h-40 h-70 mb-5 m-auto flex flex-col md:flex-row gap-2 md:rounded-bl-full rounded-tr-full md:bg-gray-600 bg-cyan-600 shadow-lg p-5 md:px-10 border-2">
                       <img
                         src={item.image}
                         alt="image"
                         className="w-20 h-20 rounded-full border-2 border-gray-200 bg-gray-800 p-1"
                       />
                       <div className="">
-                      <h1 className="text-white px-2 font-bold">{item.Name}</h1>
-                      <p className="px-1 overflow-hidden text-white text-ellipsis max-w-[calc(100%)]">
-                        "{item.text}"
-                      </p>
+                        <h1 className="text-white px-2 font-bold">
+                          {item.Name}
+                        </h1>
+                        <p className="px-1 overflow-hidden text-white text-ellipsis max-w-[calc(100%)]">
+                          "{item.text}"
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -360,10 +360,10 @@ const AboutUs = () => {
               Trusted by the same companies you love
             </p>
           </div>
-          <div className="flex gap-15 items-center justify-center py-10">
-          <img src={company1} alt="asign" width={150} height={100}/>
-          <img src={company2} alt="sarsky" width={150} height={100}/>
-          <img src={company3} alt="zios" width={150} height={100}/>
+          <div className="flex gap-[4rem] items-center flex-wrap justify-center py-10">
+            <img src={company1} alt="asign" width={120} height={100} />
+            <img src={company2} alt="sarsky" width={120} height={100} />
+            <img src={company3} alt="zios" width={120} height={100} />
           </div>
         </div>
       </section>
@@ -408,7 +408,7 @@ const AboutUs = () => {
             Talented minds behind our platform
           </p>
         </div>
-        <div className="flex justify-center gap-10">
+        <div className="flex justify-center md:flex-row flex-col gap-10">
           <div class="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800">
             <img
               src={dev1}

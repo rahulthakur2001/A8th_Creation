@@ -118,7 +118,7 @@ const Login = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-[url(../src/assets/login.jpg)] bg-contain">
+    <div className="flex flex-col items-center justify-center h-screen bg-[url(../src/assets/login.jpg)] bg-no-repeat bg-cover">
       <ToastContainer />
       <div className="relative w-[768px] max-w-full min-h-[480px] backdrop-blur-xs rounded-lg shadow-white shadow-inner overflow-hidden transition-transform duration-700">
         {/* Forms Container */}
@@ -228,7 +228,8 @@ const Login = () => {
 
         {/* OTP Form */}
         <div
-          className={`absolute bottom-0 left-0 w-full h-full flex flex-col items-center justify-center p-10 bg-transparent transition-transform duration-700 ${isOtpActive ? "translate-y-0" : "-translate-y-100"
+          className={`absolute bottom-0 left-0 w-full h-full flex flex-col items-center justify-center p-10 bg-transparent transition-transform duration-700 
+            ${isOtpActive ? "translate-y-0" : "-translate-y-full"
             }`}
         >
           <h1 className="text-2xl font-bold">OTP</h1>

@@ -148,10 +148,11 @@ const TypewriterComponent = () => {
 
   return (
     <div>
-      <div className="absolute h-100 md:w-314 w-full">
+      <div className="h-screen">
+      <div className="absolute h-[30rem] md:h-[32rem] w-full">
         <img src={image} alt="" className="object-cover h-full w-full" />
       </div>
-      <div className="relative flex flex-col justify-center items-center h-100 p-10 text-white text-center">
+      <div className="relative flex flex-col justify-center items-center p-[5rem] md:p-[12rem] text-white text-center">
         <h1 className="text-xl md:text-3xl font-semibold">
           Discover Stunning Icons & Images –
           <Typewriter
@@ -175,8 +176,9 @@ const TypewriterComponent = () => {
           Explore Now <FaChevronCircleRight size={18} />
         </button>
       </div>
+      </div>
 
-      <section className="md:px-15 md:py-6 px-8 py-4">
+      <section className="md:px-14 px-8">
         <div className="flex items-center justify-between md:flex-row flex-col">
           <div>
             <h2 className="text-2xl font-bold">
@@ -213,7 +215,8 @@ const TypewriterComponent = () => {
               )}
               <h3 className="mt-3 font-semibold">{family.title}</h3>
               <p className="text-sm text-gray-500">
-                Images & icons by <span className="text-blue-500">{family.author}</span>
+                Images & icons by{" "}
+                <span className="text-blue-500">{family.author}</span>
               </p>
               <button className="flex items-center gap-2 mt-3 px-4 py-2 bg-gray-200 text-gray-700 rounded-md text-sm">
                 Explore
@@ -237,21 +240,21 @@ const TypewriterComponent = () => {
             <a href="#_">
               <img
                 src={sec}
-                className="rounded-xl  -rotate-10 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
+                className="rounded-xl -rotate-10 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
                 alt="Design workspace"
               />
             </a>
             <a href="#_">
               <img
                 src={third}
-                className="rounded-xl  rotate-5 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
+                className="rounded-xl rotate-5 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
                 alt="Creative materials"
               />
             </a>
             <a href="#_">
               <img
                 src={fourth}
-                className="rounded-xl  -rotate-10 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
+                className="rounded-xl -rotate-10 hover:rotate-0 duration-500 hover:-translate-y-1 h-80 w-120 object-cover hover:scale-140 transform origin-bottom"
                 alt="Design inspiration"
               />
             </a>
@@ -271,7 +274,7 @@ const TypewriterComponent = () => {
           <h2 className="md:text-5xl drop-shadow-2xl text-3xl md:w-200 text-center font-bold font-serif">
             Discover a World of Visual Inspiration
           </h2>
-          <p className="mt-4 md:px-25 md:text-[15px] w-80 md:w-full text-sm text-center">
+          <p className="mt-4 md:px-[4rem] md:text-[15px] w-80 md:w-full text-sm text-center">
             "Immerse yourself in an ever-growing library of stunning
             photographs, digital illustrations, and visual art from creators
             worldwide. Whether you’re looking for design ideas, reference
@@ -284,7 +287,7 @@ const TypewriterComponent = () => {
           <h2 className="md:text-5xl drop-shadow-2xl text-3xl md:w-200 text-center font-bold font-serif">
             Effortless Image Upload and Management
           </h2>
-          <p className="mt-4 md:px-25 md:text-[15px] w-80 md:w-full text-sm text-center">
+          <p className="mt-4 md:px-[4rem] md:text-[15px] w-80 md:w-full text-sm text-center">
             "Upload your photos in just a few clicks with our intuitive
             drag-and-drop uploader. Organize them seamlessly into folders or
             collections, tag them for better discoverability, and enjoy
@@ -296,7 +299,7 @@ const TypewriterComponent = () => {
           <h2 className="md:text-5xl drop-shadow-2xl text-3xl md:w-200 text-center font-bold font-serif">
             Collaborate and Share with Precision
           </h2>
-          <p className="mt-4 md:px-25 md:text-[15px] w-80 md:w-full text-sm text-center">
+          <p className="mt-4 md:px-[4rem] md:text-[15px] w-80 md:w-full text-sm text-center">
             "Whether you’re working with clients, a creative team, or showcasing
             a portfolio, our platform makes collaboration simple. Share selected
             collections via secure links, control permissions (view, download,
@@ -307,7 +310,7 @@ const TypewriterComponent = () => {
           <h2 className="md:text-5xl drop-shadow-2xl text-3xl md:w-200 text-center font-bold font-serif">
             Flexible Downloads and Format Support
           </h2>
-          <p className="mt-4 md:px-25 md:text-[15px] w-80 md:w-full text-sm text-center">
+          <p className="mt-4 md:px-[4rem] md:text-[15px] w-80 md:w-full text-sm text-center">
             "Choose the download settings that suit your project—web-friendly
             JPEGs, high-resolution PNGs, or original RAW files. Select image
             dimensions, quality levels, or preset aspect ratios based on where

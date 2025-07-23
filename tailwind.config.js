@@ -9,7 +9,19 @@ export default {
     'p-4',
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        120: "30rem", // ≈ 480px
+      },
+      scale: {
+        140: "1.4",
+      },
+      rotate: {
+        5: "5deg",
+        10: "10deg",
+        "-10": "-10deg",
+      },
+    },
   },
   plugins: [],
 }

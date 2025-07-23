@@ -39,13 +39,13 @@ const ContactUs = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Corrected typo from 'pereventDefault' to 'preventDefault'
     try {
-      const response = await PostApi('contact/create', formData);
+      const response = await PostApi("contact/create", formData);
       if (response.status) {
         toast.success(response.message);
       }
@@ -55,15 +55,16 @@ const ContactUs = () => {
     }
   };
 
-
   return (
     <div>
       <div className="w-full min-h-screen p-10">
-        <div className="max-w-6xl mx-auto flex justify-between md:flex-row flex-col gap-15">
+        <div className="max-w-6xl mx-auto flex justify-between md:flex-row flex-col gap-[4rem]">
           {/* Left Section */}
           <div className="w-[60%] md:pt-20 pt-2">
-            <h1 className="text-4xl md:text-5xl font-semibold text-nowrap mb-5">Contact Us</h1>
-            <p className="text-gray-600 mb-4 md:w-100 w-80">
+            <h1 className="text-4xl md:text-5xl font-semibold text-nowrap mb-5">
+              Contact Us
+            </h1>
+            <p className="text-gray-600 mb-4 md:w-[60%] w-60">
               Email, call, or complete the form to learn how A8th creation can
               solve your messaging problem.
             </p>
@@ -75,7 +76,7 @@ const ContactUs = () => {
             </a>
 
             {/* Additional Information */}
-            <div className="mt-10 flex md:flex-row flex-col space-x-2">
+            <div className="mt-10 flex md:flex-row flex-col space-x-3">
               <div>
                 <h3 className="text-[17px] font-semibold">Customer Support</h3>
                 <p className="text-gray-600 text-[14px] mb-6">
@@ -126,14 +127,14 @@ const ContactUs = () => {
                   required
                   placeholder="First name"
                   onChange={handleChangeInput}
-                  className="w-full p-3 border border-gray-400 rounded-4xl"
+                  className="w-full p-3 border border-gray-400 rounded-[2rem]"
                 />
                 <input
                   type="text"
                   name="lastName"
                   placeholder="Last name"
                   onChange={handleChangeInput}
-                  className="w-full p-3 border border-gray-400 rounded-4xl"
+                  className="w-full p-3 border border-gray-400 rounded-[2rem]"
                 />
               </div>
 
@@ -142,17 +143,16 @@ const ContactUs = () => {
                 <span className="absolute left-3 top-3">📧</span>
                 <input
                   type="email"
-
                   name="email"
                   placeholder="Your email"
                   onChange={handleChangeInput}
-                  className="w-full p-3 pl-10 border border-gray-400 rounded-4xl"
+                  className="w-full p-3 pl-10 border border-gray-400 rounded-[2rem]"
                 />
               </div>
 
               {/* Phone Number */}
               <div className="mt-4 flex">
-                <select className="p-3 border border-gray-400 rounded-l-4xl font-bold">
+                <select className="p-3 border border-gray-400 rounded-l-[2rem] font-bold">
                   <option>+91</option>
                   <option>+1</option>
                   <option>+81</option>
@@ -173,11 +173,11 @@ const ContactUs = () => {
                 placeholder="How can we help?"
                 name="description"
                 onChange={handleChangeInput}
-                className="w-full p-3 border border-gray-400 rounded-3xl mt-4 h-28 max-h-30"
+                className="w-full p-3 border border-gray-400 rounded-3xl mt-4 h-[7rem] max-h-[7rem]"
               ></textarea>
 
               {/* Submit Button */}
-              <button className="w-full mt-4 bg-blue-600 text-white p-3 rounded-4xl">
+              <button className="w-full mt-4 bg-blue-600 text-white p-3 rounded-[2rem]">
                 Submit
               </button>
             </form>
@@ -202,7 +202,7 @@ const ContactUs = () => {
           {/* Left Section - Map (Embed using iframe) */}
           <div className="relative">
             <iframe
-              className="w-full h-120 border-2 border-gray-300 rounded-4xl"
+              className="w-full h-[30rem] border-2 border-gray-300 rounded-[2rem]"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.8602700909732!2d77.1459665740984!3d28.723721579936324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0176e2655757%3A0xecfb8918d8e62f21!2sA-Sign%20INSTITUTE!5e0!3m2!1sen!2sin!4v1743761286987!5m2!1sen!2sin"
               allowFullScreen=""
               loading="lazy"
@@ -268,17 +268,6 @@ const ContactUs = () => {
             If there are any question you want to ask. We will answer all your
             question.
           </span>
-          <div className="flex gap-2 md:px-100 mt-4 relative">
-            <span className="absolute left-3 md:pl-100 top-3">📧</span>
-            <input
-              type="email"
-              placeholder="Your email"
-              className="w-100 p-3 pl-10 border border-gray-400 rounded-4xl"
-            />
-            <button className="bg-blue-500 text-white px-4 rounded-4xl">
-              Submit
-            </button>
-          </div>
         </div>
         <Faq data={faqs} />
       </div>
@@ -292,16 +281,16 @@ const ContactUs = () => {
         />
 
         {/* Text and Buttons */}
-        <div className="text-center text-white z-1">
-          <h1 className="text-3xl md:text-5xl md:w-200 leading-tight font-semibold mb-6">
+        <div className="text-center text-white z-[1]">
+          <h1 className="text-3xl md:text-5xl w-[90%] md:w-[70%] mx-auto leading-tight font-semibold mb-6">
             Ready to experience the speed and simplicity of A8th Creation?
           </h1>
 
           <div className="flex justify-center space-x-4">
-            <button className="bg-white text-black font-semibold py-2 px-6 rounded-4xl">
+            <button className="bg-white text-black font-semibold py-2 px-6 rounded-full">
               Get Started
             </button>
-            <button className="text-white border border-white font-semibold py-2 px-6 rounded-4xl">
+            <button className="text-white border border-white font-semibold py-2 px-6 rounded-full">
               Learn More &gt;
             </button>
           </div>
