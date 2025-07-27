@@ -8,6 +8,8 @@ import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import PostApi from "../../APIs/Postapi";
 import { FiFilter } from "react-icons/fi";
+import Cookies from "js-cookie";
+
 
 const ExploreAll = () => {
   const [loading, setLoading] = useState(false);
@@ -23,13 +25,15 @@ const ExploreAll = () => {
   const [collection, setCollection] = useState([]);
   const navigate = useNavigate();
 
+  const token = Cookies.get("token");
   const handleUploadClick = () => {
-    const isAuthenticated = localStorage.getItem("token");
-    if (isAuthenticated) {
+    console.log("tojke",token);
       setIsOpen(true);
-    } else {
-      navigate("/login");
-    }
+    
+    // if (token) {
+    // } else {
+    //   navigate("/login"); 
+    // }
   };
 
   const fetchSavedImages = async () => {
@@ -90,7 +94,6 @@ const ExploreAll = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Failed to fetch images.");
       setHasMore(false);
     }
   };
@@ -146,9 +149,8 @@ const ExploreAll = () => {
                 <button
                   key={cat}
                   onClick={() => toggleFilter(cat)}
-                  className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-300 ${
-                    isActive ? "bg-gray-300 font-semibold" : "bg-gray-200"
-                  }`}
+                  className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-300 ${isActive ? "bg-gray-300 font-semibold" : "bg-gray-200"
+                    }`}
                 >
                   {cat}
                   {isActive && (
@@ -265,22 +267,20 @@ const ExploreAll = () => {
       {/* Tabs */}
       <div className="flex items-center space-x-4 text-[16px] my-5 top-20 z-40 bg-white pb-4 w-full max-w-8xl">
         <div
-          className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${
-            activetab === "Images"
+          className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${activetab === "Images"
               ? "border-black bg-gradient-to-b from-slate-50 to-slate-200 rounded-t-lg"
               : "text-gray-500 border-transparent hover:border-gray-400"
-          }`}
+            }`}
           onClick={() => setActivetab("Images")}
         >
           <IoMdImages />
           Images
         </div>
         <div
-          className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${
-            activetab === "Collection"
+          className={`flex items-center gap-1 cursor-pointer border-b-2 px-5 py-3 ${activetab === "Collection"
               ? "border-black bg-gradient-to-b from-slate-50 to-slate-200 rounded-t-lg"
               : "text-gray-500 border-transparent hover:border-gray-400"
-          }`}
+            }`}
           onClick={() => setActivetab("Collection")}
         >
           <FaRegHeart />
@@ -379,9 +379,8 @@ const ImageCard = ({ image, isCollection, savedIds }) => {
       {hovered && (
         <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white">
           <span
-            className={`absolute top-2 left-2 px-2 py-1 text-sm rounded ${
-              image.premium ? "bg-yellow-500" : "bg-gray-600"
-            }`}
+            className={`absolute top-2 left-2 px-2 py-1 text-sm rounded ${image.premium ? "bg-yellow-500" : "bg-gray-600"
+              }`}
           >
             {image.premium ? "Premium" : "Free"}
           </span>
@@ -395,9 +394,8 @@ const ImageCard = ({ image, isCollection, savedIds }) => {
             {!isCollection && (
               <button
                 onClick={() => handleSaveImage(image?._id)}
-                className={`bg-white p-3 rounded shadow ${
-                  isSaved ? "text-red-500" : "hover:text-red-500"
-                }`}
+                className={`bg-white p-3 rounded shadow ${isSaved ? "text-red-500" : "hover:text-red-500"
+                  }`}
               >
                 {isSaved ? <FaHeart /> : <FaRegHeart />}
               </button>
